@@ -6,7 +6,7 @@ let dataKey = mockStorge('UsersList', Mock.mock({
   'data|100': [
     {
       'id|+1': 1,
-      name: '@cname',
+      name: '@name',
       nickName: '@last',
       phone: /^1[34578]\d{9}$/,
       'age|11-99': 1,

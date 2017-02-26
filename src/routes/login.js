@@ -26,7 +26,7 @@ const login = ({
     <div className={styles.form}>
       <div className={styles.logo}>
         <img src={config.logoSrc} />
-        <span>Ant Design</span>
+        <span>中标贷信息录入系统</span>
       </div>
       <form>
         <FormItem hasFeedback>

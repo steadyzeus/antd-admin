@@ -14,6 +14,15 @@ export default function ({history, app}) {
       },
       childRoutes: [
         {
+          path: 'profiles',
+          name: 'profiles',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              cb(null, require('./routes/users'))
+            })
+          }
+        },
+        {
           path: 'dashboard',
           name: 'dashboard',
           getComponent (nextState, cb) {
@@ -29,7 +38,24 @@ export default function ({history, app}) {
               cb(null, require('./routes/users'))
             })
           }
-        }, {
+        },{
+          path: 'usersManagement',
+          name: 'usersManagement',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              cb(null, require('./routes/usersManagement'))
+            })
+          }
+        },{
+          path: 'addNewUser',
+          name: 'addNewUser',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              cb(null, require('./routes/addNewUser'))
+            })
+          }
+        }
+        , {
           path: 'ui/ico',
           name: 'ui/ico',
           getComponent (nextState, cb) {

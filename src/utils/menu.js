@@ -1,14 +1,37 @@
 module.exports = [
   {
+    key: 'usersManagement',
+    name: '客户管理',
+    icon: 'book'
+
+  },
+  {
+    key: 'addNewUser',
+    name: '添加新客户',
+    icon: 'plus'
+
+  },
+  {
+    key: 'users',
+    name: '个人资料',
+    icon: 'team'
+
+  },
+  {
+    key: 'otherFiles',
+    name: '其它资料',
+    icon: 'solution'
+  },
+  {
     key: 'dashboard',
     name: '仪表盘',
     icon: 'laptop'
   },
-  {
+  /*{
     key: 'users',
     name: '用户管理',
     icon: 'user'
-  },
+  },*/
   {
     key: 'ui',
     name: 'UI组件',
