@@ -59,7 +59,7 @@ export default {
           payload: {
             list: data.data,
             pagination: data.page,
-            dataTypeObject:{[dataType]:data.data}
+            dataType:dataType
           }
         })
       }
@@ -117,15 +117,18 @@ export default {
       }
     }
   },
-
   reducers: {
     showLoading (state) {
       return { ...state, loading: true }
     },
     querySuccess (state, action) {
-      const {list, pagination, dataTypeObject} = action.payload
+      const {list, pagination, dataType} = action.payload
       return {
-        ...state, ...dataTypeObject
+        ...state, loading: false,[dataType]:{list:list,
+        pagination: {
+      ...state.pagination,
+      ...pagination
+      }}
       }
     },
     showModal (state, action) {

@@ -10,8 +10,8 @@ module.exports = [
     name: '添加新客户',
     icon: 'plus'
 
-  },
-  {
+  }
+  /*{
     key: 'users',
     name: '个人资料',
     icon: 'team'
@@ -27,11 +27,11 @@ module.exports = [
     name: '仪表盘',
     icon: 'laptop'
   },
-  /*{
+  /!*{
     key: 'users',
     name: '用户管理',
     icon: 'user'
-  },*/
+  },*!/
   {
     key: 'ui',
     name: 'UI组件',
@@ -72,5 +72,5 @@ module.exports = [
         ]
       }
     ]
-  }
+  }*/
 ]

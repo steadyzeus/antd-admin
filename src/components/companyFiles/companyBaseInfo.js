@@ -1,5 +1,5 @@
 import React from 'react'
-import {Table, Popconfirm} from 'antd'
+import {Table, Popconfirm,Button} from 'antd'
 import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
 
@@ -135,6 +135,7 @@ class companyBaseInfo extends React.Component {
       }
     ]
     return <div>
+      <span>1.营业执照正、副本(三合一)或营业执照、组织机构代码证、税务登记证</span><Button type="primary">添加企业基本信息</Button>
       <Table className={styles.table} bordered scroll={{
         x: 1200
       }} columns={columns} dataSource={dataSource} loading={loading} onChange={::this.pageChange} pagination={pagination} simple rowKey={record => record.id} getBodyWrapper={this.getBodyWrapper} />
