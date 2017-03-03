@@ -1,4 +1,4 @@
-import { create, remove, update, query } from '../services/users'
+import { queryBizName } from '../services/comanyFiles'
 import { parse } from 'qs'
 
 export default {
@@ -50,21 +50,22 @@ export default {
   effects: {
     *query ({ payload }, { call, put }) {
       yield put({ type: 'showLoading' })
-      const data = yield call(query, parse(payload))
-      debugger;
+      const data = yield call(queryBizName, parse(payload))
       const dataType=parse(payload).dataType;
+      debugger;
       if (data) {
         yield put({
           type: 'querySuccess',
           payload: {
-            list: data.data,
-            pagination: data.page,
+            list: data.query.results.json.Data,
+            pagination: {"current": "1",
+          "total": 20,"pageSize":10},
             dataType:dataType
           }
         })
       }
-    },
-    *'delete' ({ payload }, { call, put }) {
+    }
+    /**'delete' ({ payload }, { call, put }) {
       yield put({ type: 'showLoading' })
       const data = yield call(remove, { id: payload })
       if (data && data.success) {
@@ -115,16 +116,19 @@ export default {
           }
         })
       }
-    }
+    }*/
   },
   reducers: {
     showLoading (state) {
       return { ...state, loading: true }
     },
     querySuccess (state, action) {
+      debugger;
       const {list, pagination, dataType} = action.payload
+      const listData=JSON.parse(list).CorpList;
+      debugger;
       return {
-        ...state, loading: false,[dataType]:{list:list,
+        ...state, loading: false,[dataType]:{list:listData,
         pagination: {
       ...state.pagination,
       ...pagination

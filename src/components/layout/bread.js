@@ -21,6 +21,7 @@ const getPathSet = function (menuArray, parentPath) {
 getPathSet(menu)
 
 function Bread ({ location }) {
+  debugger;
   let pathNames = []
   location.pathname.substr(1).split('/').map((item, key) => {
     if (key > 0) {

@@ -2,6 +2,7 @@ import React from 'react'
 import {Table, Popconfirm,Button} from 'antd'
 import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
+const Mock = require('mockjs')
 
 class companyBaseInfo extends React.Component {
   constructor (props) {
@@ -76,49 +77,60 @@ class companyBaseInfo extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '头像',
-        dataIndex: 'avatar',
-        key: 'avatar',
+        title: '公司名称首字',
+        dataIndex: 'Name',
+        key: 'RandomName',
         width: 64,
         className: styles.avatar,
-        render: (text) => <img width={24} src={text} />
+        render: (text) => {
+          let avatar = Mock.Random.image('100x100', Mock.Random.color(), '#757575', 'png', text.substr(0, 1))
+         return <img width={24} src={avatar} />}
       }, {
-        title: '姓名',
-        dataIndex: 'name',
-        key: 'name'
+        title: '公司名称',
+        dataIndex: 'Name',
+        key: 'Name'
       }, {
-        title: '昵称',
-        dataIndex: 'nickName',
-        key: 'nickName'
+        title: '统一代码证',
+        dataIndex: 'Code',
+        key: 'Code'
       }, {
-        title: '年龄',
-        dataIndex: 'age',
-        key: 'age',
+        title: '法人',
+        dataIndex: 'Owner',
+        key: 'Owner',
         render: (text) => <span>{text}岁</span>
       }, {
-        title: '性别',
-        dataIndex: 'isMale',
-        key: 'isMale',
+        title: '股东',
+        dataIndex: 'Partner',
+        key: 'Partner',
         render: (text) => <span>{text
               ? '男'
               : '女'}</span>
       }, {
-        title: '电话',
-        dataIndex: 'phone',
-        key: 'phone'
+        title: '实际控制人',
+        dataIndex: 'Controller',
+        key: 'Controller'
       }, {
-        title: '邮箱',
-        dataIndex: 'email',
-        key: 'email'
+        title: '关联企业',
+        dataIndex: 'RelationCorp',
+        key: 'RelationCorp'
       }, {
-        title: '住址',
-        dataIndex: 'address',
-        key: 'address'
+        title: '是否有违法信息',
+        dataIndex: 'Illegal',
+        key: 'Illegal'
       }, {
-        title: '创建时间',
-        dataIndex: 'createTime',
-        key: 'createTime'
+        title: '扫描文件',
+        dataIndex: 'ScanFile',
+        key: 'ScanFile'
       }, {
+        title: '添加时间',
+        dataIndex: 'AddTime',
+        key: 'AddTime'
+      }, {
+        title: '修改时间',
+        dataIndex: 'ModifyTime',
+        key: 'ModifyTime'
+      }
+      , {
         title: '操作',
         key: 'operation',
         width: 100,
