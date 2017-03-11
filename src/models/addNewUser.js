@@ -148,7 +148,16 @@ export default {
         let corpMaterial =allData.CorpMaterial.DataList;
         let corpObject={};
         for(let item of corpMaterial){
-          corpObject[item.BizName]={list:JSON.parse(item.Data)};
+          corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
+            modalVisible: false,
+            modalType: 'create',
+            pagination: {
+              showSizeChanger: true,
+              showQuickJumper: true,
+              showTotal: corpMaterial => `共 ${corpMaterial.length} 条`,
+              current: 1,
+              total: null
+            }};
         }
         yield put({
           type: 'queryAllDataSuccess',
