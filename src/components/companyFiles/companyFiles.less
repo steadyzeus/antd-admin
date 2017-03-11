@@ -1,4 +1,5 @@
 .table {
+  margin-top:15px;
   td.avatar {
     img {
       border-radius: 50%;
@@ -11,7 +12,7 @@
       /*height: 60px;*/
 
       &:nth-child(1) {
-        width: 6%;
+        width: 10%;
       }
 
       &:nth-child(2) {
@@ -27,7 +28,7 @@
       }
 
       &:nth-child(5) {
-        width: 6%;
+        width: 8%;
       }
 
       &:nth-child(6) {
@@ -43,7 +44,7 @@
       }
 
       &:nth-child(9) {
-        width: 14%;
+        width: 8%;
       }
 
       &:nth-child(10) {
@@ -91,4 +92,94 @@
       }
     }
   }
+}
+.table8 {
+  margin-top:15px;
+  td.avatar {
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  :global {
+    .ant-table-tbody > tr > td,
+    .ant-table-thead > tr > th {
+      /*height: 60px;*/
+
+      &:nth-child(1) {
+        width: 12%;
+      }
+
+      &:nth-child(2) {
+        width: 12%;
+      }
+
+      &:nth-child(3) {
+        width: 12%;
+      }
+
+      &:nth-child(4) {
+        width: 12%;
+      }
+
+      &:nth-child(5) {
+        width: 12%;
+      }
+
+      &:nth-child(6) {
+        width: 14%;
+      }
+
+      &:nth-child(7) {
+        width: 14%;
+      }
+
+      &:nth-child(8) {
+        width: 12%;
+      }
+    }
+
+    .ant-table-thead {
+      & > tr {
+        transition: none;
+        display: block;
+
+        & > th {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+
+    .ant-table-tbody {
+      & > tr {
+        transition: none;
+        display: block;
+        border-bottom: 1px solid #f5f5f5;
+
+        & > td {
+          border-bottom: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        &.ant-table-expanded-row-level-1 > td {
+          height: auto;
+        }
+      }
+    }
+  }
+}
+.marginLeft15{
+  margin-left: 15px;
+}
+.red{
+  display: inline-block;
+  color:red;
+  margin-left: 15px;
+}
+.marginBottom{
+  margin-bottom: 25px;
 }

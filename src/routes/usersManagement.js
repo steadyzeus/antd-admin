@@ -41,10 +41,10 @@ function UsersManagement ({ location, dispatch, usersManagement }) {
         }
       }))
     },
-    onDeleteItem (id) {
+    onDeleteItem (record) {
       dispatch({
         type: 'usersManagement/delete',
-        payload: id
+        payload: record
       })
     },
     onEditItem (item) {
@@ -55,6 +55,16 @@ function UsersManagement ({ location, dispatch, usersManagement }) {
           currentItem: item
         }
       })
+    },
+    onClickDetail (gongshangID) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: 'userDetails',
+        query: {
+          ...query,
+          gongshangID
+        }
+      }))
     }
   }
 
@@ -66,7 +76,7 @@ function UsersManagement ({ location, dispatch, usersManagement }) {
         pathname: '/usersManagement',
         query: {
           field: fieldsValue.field,
-          keyword: fieldsValue.keyword
+          corpname: fieldsValue.keyword
         }
       })) : dispatch(routerRedux.push({
         pathname: '/usersManagement'

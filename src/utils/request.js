@@ -6,9 +6,11 @@ export default function request (url, options) {
       q: "select * from json where url='" + url + '?' + Ajax.param(options.data) + "'",
       format: 'json'
     })
-  } else {
+  }
+  else {
     return Ajax.ajax({
       url: url,
+      contentType: "application/json",
       method: options.method || 'get',
       data: options.data || {},
       processData: options.method === 'get',

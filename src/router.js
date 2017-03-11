@@ -54,6 +54,14 @@ export default function ({history, app}) {
               cb(null, require('./routes/addNewUser'))
             })
           }
+        },{
+          path: 'userDetails',
+          name: 'userDetails',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              cb(null, require('./routes/addNewUser'))
+            })
+          }
         }
         , {
           path: 'ui/ico',

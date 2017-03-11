@@ -69,9 +69,9 @@ class companyBaseInfo extends React.Component {
 
   render () {
     const {
-      loading,
       dataSource,
       pagination,
+      onAdd,
       onDeleteItem,
       onEditItem
     } = this.props
@@ -96,15 +96,11 @@ class companyBaseInfo extends React.Component {
       }, {
         title: '法人',
         dataIndex: 'Owner',
-        key: 'Owner',
-        render: (text) => <span>{text}岁</span>
+        key: 'Owner'
       }, {
         title: '股东',
         dataIndex: 'Partner',
-        key: 'Partner',
-        render: (text) => <span>{text
-              ? '男'
-              : '女'}</span>
+        key: 'Partner'
       }, {
         title: '实际控制人',
         dataIndex: 'Controller',
@@ -124,11 +120,13 @@ class companyBaseInfo extends React.Component {
       }, {
         title: '添加时间',
         dataIndex: 'AddTime',
-        key: 'AddTime'
+        key: 'AddTime',
+        render: (text) => <span>{new Date(text).toLocaleString()}</span>
       }, {
         title: '修改时间',
         dataIndex: 'ModifyTime',
-        key: 'ModifyTime'
+        key: 'ModifyTime',
+        render: (text) => <span>{new Date(text).toLocaleString()}</span>
       }
       , {
         title: '操作',
@@ -139,18 +137,18 @@ class companyBaseInfo extends React.Component {
             <a onClick={() => onEditItem(record)} style={{
               marginRight: 4
             }}>编辑</a>
-            <Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>
+            {/*<Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>
               <a>删除</a>
-            </Popconfirm>
+            </Popconfirm>*/}
           </p>
         )
       }
     ]
-    return <div>
-      <span>1.营业执照正、副本(三合一)或营业执照、组织机构代码证、税务登记证</span><Button type="primary">添加企业基本信息</Button>
+    return <div className={styles.marginBottom}>
+      <span>1.营业执照正、副本(三合一)或营业执照、组织机构代码证、税务登记证</span><span className={styles.red}>注意：要录入其它资料必须先录入该工商信息</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加企业基本信息</Button>
       <Table className={styles.table} bordered scroll={{
         x: 1200
-      }} columns={columns} dataSource={dataSource} loading={loading} onChange={::this.pageChange} pagination={pagination} simple rowKey={record => record.id} getBodyWrapper={this.getBodyWrapper} />
+      }} columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }

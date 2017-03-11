@@ -1,38 +1,39 @@
 import React, { PropTypes } from 'react'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
-import UserList from '../components/usersManagement/list'
-import UserSearch from '../components/usersManagement/search'
-import UserModal from '../components/usersManagement/modal'
+import CompanyBaseInfoModal from '../components/companyFiles/companyBaseInfoModal'
 import CompanyBaseInfo from '../components/companyFiles/companyBaseInfo'
-import { Tabs, Icon } from 'antd';
+import ZhangchengModal from '../components/companyFiles/zhangchengModal'
+import Zhangcheng from '../components/companyFiles/zhangcheng'
+import { Tabs, Icon,message } from 'antd';
 const TabPane = Tabs.TabPane;
 
-function AddNewUser ({ location, dispatch, companyFiles }) {
-  const { loading } = companyFiles,companyBaseInfo=companyFiles.companyBaseInfo;
-  /*const { field, keyword } = location.query
+function AddNewUser ({ location, dispatch, addNewUser }) {
+  const { loading,gongshang,zhangcheng } = addNewUser;
+  /*const { field, keyword } = location.query*/
 
-  const userModalProps = {
-    item: modalType === 'create' ? {} : currentItem,
-    type: modalType,
-    visible: modalVisible,
+  const companyBaseInfoModalProps = {
+    item: gongshang.modalType === 'create' ? {} : gongshang.currentItem,
+    type: gongshang.modalType,
+    visible: gongshang.modalVisible,
     onOk (data) {
       dispatch({
-        type: `usersManagement/${modalType}`,
-        payload: data
+        type: `addNewUser/${gongshang.modalType}`,
+        payload: {data:data,bizName:'gongshang'}
       })
     },
     onCancel () {
       dispatch({
-        type: 'usersManagement/hideModal'
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'gongshang'}
       })
     }
-  }*/
+  }
 
   const companyBaseInfoProps = {
-    dataSource: companyBaseInfo.list,
+    dataSource: gongshang.list,
     loading,
-    pagination: companyBaseInfo.pagination,
+    pagination: gongshang.pagination,
     onPageChange (page) {
       const { query, pathname } = location
       dispatch(routerRedux.push({
@@ -41,59 +42,118 @@ function AddNewUser ({ location, dispatch, companyFiles }) {
           ...query,
           page: page.current,
           pageSize: page.pageSize,
-          dataType:'companyBaseInfo'
+          dataType:'gongshang',
+          bizName:'gongshang'
         }
       }))
     },
     onDeleteItem (id) {
       dispatch({
-        type: 'companyFiles/delete',
-        payload: id
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'gongshang'}
       })
     },
     onEditItem (item) {
       dispatch({
-        type: 'companyFiles/showModal',
+        type: 'addNewUser/showModal',
         payload: {
           modalType: 'update',
-          currentItem: item
+          currentItem: item,
+          bizName:'gongshang'
         }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==1){
+        message.warn('当前工商信息只允许添加一条！');
+      }
+      else{
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'create',
+          bizName:'gongshang'
+        }
+      })
+    }}
+  }
+
+  const zhangchengModalProps = {
+    item: zhangcheng.modalType === 'create' ? {} : zhangcheng.currentItem,
+    type: zhangcheng.modalType,
+    visible: zhangcheng.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${zhangcheng.modalType}`,
+        payload: {data:data,bizName:'zhangcheng',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'zhangcheng'}
       })
     }
   }
 
-  /*const userSearchProps = {
-    field,
-    keyword,
-    onSearch (fieldsValue) {
-      fieldsValue.keyword.length ? dispatch(routerRedux.push({
-        pathname: '/usersManagement',
+  const zhangchengProps = {
+    dataSource: zhangcheng.list,
+    loading,
+    pagination: zhangcheng.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
         query: {
-          field: fieldsValue.field,
-          keyword: fieldsValue.keyword
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'zhangcheng',
+          bizName:'zhangcheng'
         }
-      })) : dispatch(routerRedux.push({
-        pathname: '/usersManagement'
       }))
     },
-    onAdd () {
+    onDeleteItem (id) {
       dispatch({
-        type: 'usersManagement/showModal',
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'zhangcheng'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
         payload: {
-          modalType: 'create'
+          modalType: 'update',
+          currentItem: item,
+          bizName:'zhangcheng'
         }
       })
-    }
-  }*/
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'zhangcheng'
+          }
+        })
+      }}
+  }
 
-  /*const UserModalGen = () =>
-    <UserModal {...userModalProps} />*/
+  const UserModalGen = () =>
+  <div><ZhangchengModal {...zhangchengModalProps}/>< CompanyBaseInfoModal{...companyBaseInfoModalProps}/></div>
+
 
   return (
     <div className='content-inner'>
       <Tabs defaultActiveKey="1">
         <TabPane tab={<span><Icon type="book" />企业资料</span>} key="1">
           <CompanyBaseInfo {...companyBaseInfoProps}/>
+          <Zhangcheng {...zhangchengProps}/>
         </TabPane>
         <TabPane tab={<span><Icon type="laptop" />采购项目</span>} key="2">
           Tab 2
@@ -105,9 +165,7 @@ function AddNewUser ({ location, dispatch, companyFiles }) {
           Tab 4
         </TabPane>
       </Tabs>
-      {/*<UserSearch {...userSearchProps} />
-      <UserList {...userListProps} />
-      <UserModalGen />*/}
+      <UserModalGen />
     </div>
   )
 }
@@ -118,8 +176,8 @@ AddNewUser.propTypes = {
   dispatch: PropTypes.func
 }
 
-function mapStateToProps ({ companyFiles }) {
-  return { companyFiles }
+function mapStateToProps ({ addNewUser }) {
+  return { addNewUser }
 }
 
 export default connect(mapStateToProps)(AddNewUser)

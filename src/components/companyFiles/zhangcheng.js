@@ -1,10 +1,10 @@
 import React from 'react'
-import {Table, Popconfirm} from 'antd'
+import {Table, Popconfirm,Button} from 'antd'
 import {TweenOneGroup} from 'rc-tween-one'
-import styles from './list.less'
+import styles from './companyFiles.less'
 const Mock = require('mockjs')
 
-class list extends React.Component {
+class zhangcheng extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -69,55 +69,33 @@ class list extends React.Component {
 
   render () {
     const {
-      loading,
       dataSource,
       pagination,
+      onAdd,
       onDeleteItem,
-      onEditItem,
-      onClickDetail
+      onEditItem
     } = this.props
     const columns = [
       {
-        title: '公司名称首字',
+        title: '姓名',
         dataIndex: 'Name',
-        key: 'RandomName',
-        width: 64,
-        className: styles.avatar,
-        render: (text) => {
-          let avatar = Mock.Random.image('100x100', Mock.Random.color(), '#757575', 'png', text.substr(0, 1))
-          return <img width={24} src={avatar} />}
+        key: 'Name',
       }, {
-        title: '公司名称',
-        dataIndex: 'Name',
-        key: 'Name'
+        title: '验资/认缴',
+        dataIndex: 'BankRoll',
+        key: 'BankRoll'
       }, {
-        title: '统一代码证',
-        dataIndex: 'Code',
-        key: 'Code'
-      }, {
-        title: '法人',
+        title: '金额',
         dataIndex: 'Owner',
-        key: 'Owner',
+        key: 'Owner'
       }, {
-        title: '股东',
+        title: '百分比',
         dataIndex: 'Partner',
-        key: 'Partner',
+        key: 'Partner'
       }, {
-        title: '实际控制人',
-        dataIndex: 'Controller',
-        key: 'Controller'
-      }, {
-        title: '关联企业',
-        dataIndex: 'RelationCorp',
-        key: 'RelationCorp'
-      }, {
-        title: '是否有违法信息',
-        dataIndex: 'Illegal',
-        key: 'Illegal'
-      }, {
-        title: '扫描文件',
-        dataIndex: 'ScanFile',
-        key: 'ScanFile'
+        title: '贷款编号',
+        dataIndex: 'LoanId',
+        key: 'LoanId'
       }, {
         title: '添加时间',
         dataIndex: 'AddTime',
@@ -135,22 +113,21 @@ class list extends React.Component {
         width: 100,
         render: (text, record) => (
           <p>
-            <a onClick={() => onClickDetail(record.KeyID)} style={{
+            <a onClick={() => onEditItem(record)} style={{
               marginRight: 4
-            }}>查看详情</a>
-            <Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record)}>
+            }}>编辑</a>
+            {/*<Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>
               <a>删除</a>
-            </Popconfirm>
+            </Popconfirm>*/}
           </p>
         )
       }
     ]
     return <div>
-      <Table className={styles.table} bordered scroll={{
-        x: 1200
-      }} columns={columns} dataSource={dataSource} loading={loading} onChange={::this.pageChange} pagination={pagination} simple rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <span>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
+      <Table className={styles.table8} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default list
+export default zhangcheng

@@ -10,7 +10,7 @@ app.model(require('./models/app'))
 app.model(require('./models/dashboard'))
 app.model(require('./models/users'))
 app.model(require('./models/usersManagement'))
-app.model(require('./models/companyFiles'))
+app.model(require('./models/addNewUser'))
 
 // 3. Router
 app.router(require('./router'))

@@ -1,5 +1,7 @@
-import { create, remove, update, query } from '../services/users'
+//import { create, remove, update, query } from '../services/users'
+import { queryBizName,deleteBizNameByID } from '../services/addNewUser'
 import { parse } from 'qs'
+import {message} from 'antd'
 
 export default {
 
@@ -11,8 +13,9 @@ export default {
     currentItem: {},
     modalVisible: false,
     modalType: 'create',
+    message:"",
     pagination: {
-      showSizeChanger: true,
+      showSizeChanger: false,
       showQuickJumper: true,
       showTotal: total => `共 ${total} 条`,
       current: 1,
@@ -36,48 +39,30 @@ export default {
   effects: {
     *query ({ payload }, { call, put }) {
       yield put({ type: 'showLoading' })
-      const data = yield call(query, parse(payload))
+      const data = yield call(queryBizName, parse(payload))
       if (data) {
+        const listData=JSON.parse(data.Data);
         yield put({
           type: 'querySuccess',
           payload: {
-            list: data.data,
-            pagination: data.page
+            list: listData,
+            pagination: {"current":Number(parse(payload).page)||1,"total": listData.TotalLine,"pageSize":20}
           }
         })
       }
     },
-    *'delete' ({ payload }, { call, put }) {
+    *'delete' ({ payload }, {call, put }) {
       yield put({ type: 'showLoading' })
-      const data = yield call(remove, { id: payload })
-      if (data && data.success) {
+      const data = yield call(deleteBizNameByID, { record: payload })
+      if (data && data.Message=="success") {
         yield put({
-          type: 'querySuccess',
-          payload: {
-            list: data.data,
-            pagination: {
-              total: data.page.total,
-              current: data.page.current
-            }
-          }
+          type: 'query',
+          payload: location.query
         })
       }
-    },
-    *create ({ payload }, { call, put }) {
-      yield put({ type: 'hideModal' })
-      yield put({ type: 'showLoading' })
-      const data = yield call(create, payload)
-      if (data && data.success) {
-        yield put({
-          type: 'querySuccess',
-          payload: {
-            list: data.data,
-            pagination: {
-              total: data.page.total,
-              current: data.page.current
-            }
-          }
-        })
+      else{
+        yield put({ type: 'hideLoading' })
+        message.error(data.Message);
       }
     },
     *update ({ payload }, { select, call, put }) {
@@ -86,7 +71,7 @@ export default {
       const id = yield select(({ users }) => users.currentItem.id)
       const newUser = { ...payload, id }
       const data = yield call(update, newUser)
-      if (data && data.success) {
+      if (data && data.Message=="success") {
         yield put({
           type: 'querySuccess',
           payload: {
@@ -107,8 +92,10 @@ export default {
     },
     querySuccess (state, action) {
       const {list, pagination} = action.payload
+      const listData=list.CorpList;
+      /*const paginationData={...paginationData,}*/
       return { ...state,
-        list,
+        list:listData,
         loading: false,
         pagination: {
           ...state.pagination,
@@ -120,7 +107,10 @@ export default {
     },
     hideModal (state) {
       return { ...state, modalVisible: false }
-    }
+    },
+    hideLoading (state) {
+      return { ...state, loading: false }
+    },
   }
 
 }
