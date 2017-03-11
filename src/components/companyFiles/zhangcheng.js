@@ -123,9 +123,9 @@ class zhangcheng extends React.Component {
         )
       }
     ]
-    return <div>
-      <span>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
-      <Table className={styles.table8} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+    return <div className={styles.marginBottom}>
+      <span className={styles.title}>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" icon="plus" onClick={onAdd}>添加公司章程正本</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }

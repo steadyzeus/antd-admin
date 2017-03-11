@@ -56,13 +56,14 @@ function UsersManagement ({ location, dispatch, usersManagement }) {
         }
       })
     },
-    onClickDetail (gongshangID) {
+    onClickDetail (record) {
       const { query, pathname } = location
       dispatch(routerRedux.push({
         pathname: 'userDetails',
         query: {
           ...query,
-          gongshangID
+          KeyID:record.KeyID,
+          Name:record.Name
         }
       }))
     }

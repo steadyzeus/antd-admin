@@ -32,7 +32,7 @@ export async function updateBizName (params) {
 }
 
 export async function queryUserDetailsBygongshangID (params) {
-  return request('http://p.cdito.cn:8118/InputSystem/DataService/api/v1/corp/detail/'+params.gongshangID , {
+  return request('http://p.cdito.cn:8118/InputSystem/DataService/api/v1/corp/detail/'+params.KeyID , {
     method: 'get',
     data: params
   })

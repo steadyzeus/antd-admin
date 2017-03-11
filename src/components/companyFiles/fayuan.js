@@ -4,7 +4,7 @@ import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
 const Mock = require('mockjs')
 
-class companyBaseInfo extends React.Component {
+class fayuan extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -77,46 +77,25 @@ class companyBaseInfo extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '公司名称首字',
-        dataIndex: 'Name',
-        key: 'RandomName',
-        width: 64,
-        className: styles.avatar,
-        render: (text) => {
-          let avatar = Mock.Random.image('100x100', Mock.Random.color(), '#757575', 'png', text.substr(0, 1))
-         return <img width={24} src={avatar} />}
-      }, {
         title: '公司名称',
         dataIndex: 'Name',
-        key: 'Name'
+        key: 'Name',
       }, {
         title: '统一代码证',
         dataIndex: 'Code',
         key: 'Code'
       }, {
-        title: '法人',
-        dataIndex: 'Owner',
-        key: 'Owner'
-      }, {
-        title: '股东',
-        dataIndex: 'Partner',
-        key: 'Partner'
-      }, {
-        title: '实际控制人',
-        dataIndex: 'Controller',
-        key: 'Controller'
-      }, {
-        title: '关联企业',
-        dataIndex: 'RelationCorp',
-        key: 'RelationCorp'
-      }, {
-        title: '是否有违法信息',
-        dataIndex: 'Illegal',
-        key: 'Illegal'
+        title: '有无法院执行信息',
+        dataIndex: 'Law',
+        key: 'Law'
       }, {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile'
+      }, {
+        title: '贷款编号',
+        dataIndex: 'LoanId',
+        key: 'LoanId'
       }, {
         title: '添加时间',
         dataIndex: 'AddTime',
@@ -145,10 +124,10 @@ class companyBaseInfo extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>1.工商信息：营业执照正、副本(三合一)或营业执照、组织机构代码证、税务登记证</span><span className={styles.red}>注意：要录入其它资料必须先录入该工商信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加企业基本信息</Button>
-      <Table  bordered className={styles.marginTop15} columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <span className={styles.title}>法院执行信息表</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default companyBaseInfo
+export default fayuan

@@ -31,7 +31,33 @@ export default {
         current: 1,
         total: null
       }},
+    zizhi:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    fayuan:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
     loading: false,
+    currentContent:"添加新客户信息",
+    Name:""
   },
 
   subscriptions: {
@@ -41,7 +67,12 @@ export default {
         if (location.pathname === '/userDetails') {
           dispatch({
             type: 'query',
-            payload: {...location.query}
+            payload: {...location.query,currentContent:'客户详细信息'}
+          })
+        }
+        if(location.pathname === '/addNewUser'){
+          dispatch({
+            type: 'clean',
           })
         }
       })
@@ -63,7 +94,9 @@ export default {
           type: 'queryAllDataSuccess',
           payload: {
             allBizName: corpObject,
-            pagination: {"current": 1, "total": '',"pageSize":20}
+            pagination: {"current": 1, "total": '',"pageSize":20},
+            currentContent:payload.currentContent,
+            Name:payload.Name
           }
         })
       }
@@ -156,10 +189,64 @@ export default {
       }}
       }
     },
+    clean(state){
+      return {gongshang:{
+        list:[],
+        currentItem: {},
+        modalVisible: false,
+        modalType: 'create',
+        pagination: {
+          showSizeChanger: true,
+          showQuickJumper: true,
+          showTotal: total => `共 ${total} 条`,
+          current: 1,
+          total: null
+        }},
+        zhangcheng:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        zizhi:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        fayuan:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        loading: false,
+        currentContent:"添加新客户信息",
+        Name:""
+      }
+    },
     queryAllDataSuccess (state, action) {
-      const {allBizName, pagination} = action.payload
+      const {allBizName, pagination,currentContent,Name} = action.payload
       return {
-        ...state,...allBizName,loading: false
+        ...state,...allBizName,loading: false,currentContent:currentContent,Name:Name
       }
     },
     queryCreatSuccess (state, action) {

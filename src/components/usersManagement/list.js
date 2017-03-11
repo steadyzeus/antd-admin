@@ -135,7 +135,7 @@ class list extends React.Component {
         width: 100,
         render: (text, record) => (
           <p>
-            <a onClick={() => onClickDetail(record.KeyID)} style={{
+            <a onClick={() => onClickDetail(record)} style={{
               marginRight: 4
             }}>查看详情</a>
             <Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record)}>
@@ -146,9 +146,7 @@ class list extends React.Component {
       }
     ]
     return <div>
-      <Table className={styles.table} bordered scroll={{
-        x: 1200
-      }} columns={columns} dataSource={dataSource} loading={loading} onChange={::this.pageChange} pagination={pagination} simple rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <Table className={styles.marginTop15} bordered  columns={columns} dataSource={dataSource} loading={loading} onChange={::this.pageChange} pagination={pagination} simple rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
