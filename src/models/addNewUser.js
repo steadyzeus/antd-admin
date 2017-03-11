@@ -55,6 +55,66 @@ export default {
         current: 1,
         total: null
       }},
+    gerenfayuan:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    yingshou:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    yingfu:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    yufu:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    yushou:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
     loading: false,
     currentContent:"添加新客户信息",
     Name:""
@@ -227,6 +287,66 @@ export default {
             total: null
           }},
         fayuan:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        gerenfayuan:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        yingshou:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        yingfu:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        yufu:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        yushou:{
           list:[],
           currentItem: {},
           modalVisible: false,

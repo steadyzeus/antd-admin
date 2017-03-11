@@ -4,7 +4,7 @@ import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
 const Mock = require('mockjs')
 
-class zhangcheng extends React.Component {
+class gerenfayuan extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -77,22 +77,26 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '姓名',
-        dataIndex: 'Name',
-        key: 'Name',
+        title: '实际控制人',
+        dataIndex: 'Controller',
+        key: 'Controller',
       }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
-      }, {
-        title: '金额',
+        title: '法人',
         dataIndex: 'Owner',
         key: 'Owner'
       }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
+        title: '身份证号',
+        dataIndex: 'PID',
+        key: 'PID'
       }, {
+        title: '有无法院执行信息',
+        dataIndex: 'Law',
+        key: 'Law'
+      }, {
+        title: '扫描文件',
+        dataIndex: 'ScanFile',
+        key: 'ScanFile'
+      },{
         title: '贷款编号',
         dataIndex: 'LoanId',
         key: 'LoanId'
@@ -123,11 +127,11 @@ class zhangcheng extends React.Component {
         )
       }
     ]
-    return <div>
-      <span>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
-      <Table className={styles.table8} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+    return <div className={styles.marginBottom}>
+      <span className={styles.title}>个人法院执行信息</span><Button className={styles.marginLeft15} icon="plus" type="primary" onClick={onAdd}>添加个人法院执行信息</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default zhangcheng
+export default gerenfayuan

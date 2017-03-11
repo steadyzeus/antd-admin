@@ -2,6 +2,12 @@ import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker, TimePicker} from 'antd'
 const FormItem = Form.Item
 
+import moment from 'moment';
+
+// It's recommended to set locale in entry file globaly.
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
+
 const formItemLayout = {
   labelCol: {
     span: 6
@@ -37,7 +43,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建应付账款' : '修改应付账款'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -47,46 +53,57 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Name', {
-            initialValue: item.Name,
+        <FormItem label='供应商名称：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('SupplierName', {
+            initialValue: item.SupplierName,
             rules: [
               {
                 required: true,
-                message: '请填写姓名'
+                message: '请填写供应商名称'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='验资/认缴：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BankRoll', {
-            initialValue: item.BankRoll,
+        <FormItem label='合同日期：' hasFeedback {...formItemLayout} >
+          {getFieldDecorator('ContractDate', {
+            initialValue: moment(item.ContractDate) || moment(new Date()),
             rules: [
               {
                 required: false,
-                message: '请填验资/认缴'
+                message: '请填写合同日期'
+              }
+            ]
+          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
+        </FormItem>
+        <FormItem label='合同金额' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('ContractAccount', {
+            initialValue: item.ContractAccount,
+            rules: [
+              {
+                required: false,
+                message: '请填写合同金额'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Owner', {
-            initialValue: item.Owner,
+        <FormItem label='账期：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('AccountPeriod', {
+            initialValue: item.AccountPeriod,
             rules: [
               {
                 required: false,
-                message: '请填写金额'
+                message: '请填写账期'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='百分比：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Partner', {
-            initialValue: item.Partner,
+        <FormItem label='结算方式：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('PayMethod', {
+            initialValue: item.PayMethod,
             rules: [
               {
                 required: false,
-                message: '请填百分比'
+                message: '请填写结算方式'
               }
             ]
           })(<Input />)}

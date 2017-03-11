@@ -145,7 +145,7 @@ class companyBaseInfo extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>1.工商信息：营业执照正、副本(三合一)或营业执照、组织机构代码证、税务登记证</span><span className={styles.red}>注意：要录入其它资料必须先录入该工商信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加企业基本信息</Button>
+      <span className={styles.title}>工商信息</span><span className={styles.red}>注意：要录入其它资料必须先录入该工商信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加企业基本信息</Button>
       <Table  bordered className={styles.marginTop15} columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }

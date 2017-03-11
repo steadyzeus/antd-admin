@@ -4,7 +4,7 @@ import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
 const Mock = require('mockjs')
 
-class zhangcheng extends React.Component {
+class yushou extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -77,22 +77,23 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '姓名',
-        dataIndex: 'Name',
-        key: 'Name',
+        title: '客户名称',
+        dataIndex: 'CustomerName',
+        key: 'CustomerName',
       }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
+        title: '日期',
+        dataIndex: 'PreDate',
+        key: 'PreDate',
+        render: (text) => <span>{new Date(text).toLocaleString()}</span>
       }, {
         title: '金额',
-        dataIndex: 'Owner',
-        key: 'Owner'
+        dataIndex: 'PreAccount',
+        key: 'PreAccount'
       }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
-      }, {
+        title: '扫描文件',
+        dataIndex: 'ScanFile',
+        key: 'ScanFile'
+      },{
         title: '贷款编号',
         dataIndex: 'LoanId',
         key: 'LoanId'
@@ -117,17 +118,17 @@ class zhangcheng extends React.Component {
               marginRight: 4
             }}>编辑</a>
             {/*<Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>
-              <a>删除</a>
-            </Popconfirm>*/}
+             <a>删除</a>
+             </Popconfirm>*/}
           </p>
         )
       }
     ]
-    return <div>
-      <span>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
-      <Table className={styles.table8} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+    return <div className={styles.marginBottom}>
+      <span className={styles.title}>预收账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加预收账款</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default zhangcheng
+export default yushou

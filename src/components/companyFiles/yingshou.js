@@ -4,7 +4,7 @@ import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
 const Mock = require('mockjs')
 
-class zhangcheng extends React.Component {
+class yingshou extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -77,22 +77,31 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '姓名',
-        dataIndex: 'Name',
-        key: 'Name',
+        title: '客户名称',
+        dataIndex: 'CustomerName',
+        key: 'CustomerName',
       }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
+        title: '合同日期',
+        dataIndex: 'ContractDate',
+        key: 'ContractDate',
+        render: (text) => <span>{new Date(text).toLocaleString()}</span>
       }, {
-        title: '金额',
-        dataIndex: 'Owner',
-        key: 'Owner'
+        title: '合同金额',
+        dataIndex: 'ContractAccount',
+        key: 'ContractAccount'
       }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
+        title: '账期',
+        dataIndex: 'AccountPeriod',
+        key: 'AccountPeriod'
       }, {
+        title: '结算方式',
+        dataIndex: 'PayMethod',
+        key: 'PayMethod'
+      }, {
+        title: '扫描文件',
+        dataIndex: 'ScanFile',
+        key: 'ScanFile'
+      },{
         title: '贷款编号',
         dataIndex: 'LoanId',
         key: 'LoanId'
@@ -123,11 +132,11 @@ class zhangcheng extends React.Component {
         )
       }
     ]
-    return <div>
-      <span>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
-      <Table className={styles.table8} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+    return <div className={styles.marginBottom}>
+      <span className={styles.title}>应收账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加应收账款</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default zhangcheng
+export default yingshou

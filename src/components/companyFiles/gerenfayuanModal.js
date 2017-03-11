@@ -37,7 +37,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建个人法院执行信息' : '修改个人法院执行信息'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -47,46 +47,46 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Name', {
-            initialValue: item.Name,
+        <FormItem label='实际控制人：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Controller', {
+            initialValue: item.Controller,
             rules: [
               {
                 required: true,
-                message: '请填写姓名'
+                message: '请填写实际控制人'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='验资/认缴：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BankRoll', {
-            initialValue: item.BankRoll,
-            rules: [
-              {
-                required: false,
-                message: '请填验资/认缴'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='金额' hasFeedback {...formItemLayout}>
+        <FormItem label='法人：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('Owner', {
             initialValue: item.Owner,
             rules: [
               {
                 required: false,
-                message: '请填写金额'
+                message: '请填写法人'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='百分比：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Partner', {
-            initialValue: item.Partner,
+        <FormItem label='身份证号' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('PID', {
+            initialValue: item.PID,
             rules: [
               {
                 required: false,
-                message: '请填百分比'
+                message: '请填写身份证号'
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem label='有无法院执行信息：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Law', {
+            initialValue: item.Law,
+            rules: [
+              {
+                required: false,
+                message: '有无法院执行信息'
               }
             ]
           })(<Input />)}

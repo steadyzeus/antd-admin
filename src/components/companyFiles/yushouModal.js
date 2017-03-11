@@ -2,6 +2,12 @@ import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker, TimePicker} from 'antd'
 const FormItem = Form.Item
 
+import moment from 'moment';
+
+// It's recommended to set locale in entry file globaly.
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
+
 const formItemLayout = {
   labelCol: {
     span: 6
@@ -37,7 +43,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建预收账款' : '修改预收账款'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -47,46 +53,35 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Name', {
-            initialValue: item.Name,
+        <FormItem label='客户名称：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('CustomerName', {
+            initialValue: item.CustomerName,
             rules: [
               {
                 required: true,
-                message: '请填写姓名'
+                message: '请填写客户名称'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='验资/认缴：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BankRoll', {
-            initialValue: item.BankRoll,
+        <FormItem label='日期：' hasFeedback {...formItemLayout} >
+          {getFieldDecorator('PreDate', {
+            initialValue: moment(item.PreDate) || moment(new Date()),
             rules: [
               {
                 required: false,
-                message: '请填验资/认缴'
+                message: '请填写日期'
               }
             ]
-          })(<Input />)}
+          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
         </FormItem>
         <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Owner', {
-            initialValue: item.Owner,
+          {getFieldDecorator('PreAccount', {
+            initialValue: item.PreAccount,
             rules: [
               {
                 required: false,
                 message: '请填写金额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='百分比：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Partner', {
-            initialValue: item.Partner,
-            rules: [
-              {
-                required: false,
-                message: '请填百分比'
               }
             ]
           })(<Input />)}

@@ -37,7 +37,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建法院执行信息' : '修改法院执行信息'}`,
     visible,
     onOk: handleOk,
     onCancel,

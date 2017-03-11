@@ -124,7 +124,7 @@ class fayuan extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>法院执行信息表</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
+      <span className={styles.title}>法院执行信息</span><Button className={styles.marginLeft15} icon="plus" type="primary" onClick={onAdd}>添加法院执行信息</Button>
       <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
