@@ -92,7 +92,12 @@ class zhangcheng extends React.Component {
         title: '百分比',
         dataIndex: 'Partner',
         key: 'Partner'
-      }, {
+      },  {
+        title: '扫描文件',
+        dataIndex: 'ScanFile',
+        key: 'ScanFile',
+        render: (text) => <a target="_blank" href={text?("http://p.cdito.cn:8118"+text):"javascript:void(0)"} >{text?"点击查看图片":"请点击编辑上传图片"}</a>
+      },{
         title: '贷款编号',
         dataIndex: 'LoanId',
         key: 'LoanId'

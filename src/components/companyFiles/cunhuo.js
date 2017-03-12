@@ -121,7 +121,7 @@ class zhangcheng extends React.Component {
         width: 100,
         render: (text, record) => (
           <p>
-            <a onClick={() => onEditItem(record)} style={{
+            <a onClick={() => onEditItem(record,second)} style={{
               marginRight: 4
             }}>编辑</a>
             {/*<Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>

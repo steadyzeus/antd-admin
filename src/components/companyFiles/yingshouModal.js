@@ -30,7 +30,7 @@ const modal = ({
     getFieldsValue
   }
 }) => {
-  let currentImgUrl="";
+  let currentImgUrl=item.ScanFile;
   function handleOk () {
     validateFields((errors) => {
       if (errors) {
@@ -80,7 +80,6 @@ const modal = ({
         message.success(`${info.file.name} 上传成功`);
         currentImgUrl=info.file.response.Data;
         handleOk();
-        console.log(url,"url");
       }else {
         message.error(`${info.file.name} 上传失败`);
       }

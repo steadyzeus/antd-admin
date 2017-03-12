@@ -24,6 +24,7 @@ const modal = ({
     getFieldsValue
   }
 }) => {
+  let currentImgUrl=item.ScanFile;
   function handleOk () {
     validateFields((errors) => {
       if (errors) {
@@ -32,7 +33,8 @@ const modal = ({
       const data = {
         ...getFieldsValue(),
         key: item.key,
-        Timing:second
+        Timing:second,
+        ScanFile:currentImgUrl
       }
       onOk(data)
     })
@@ -69,7 +71,13 @@ const modal = ({
     }
 
     if (info.file.status === 'done') {
-      message.success(`${info.file.name} 上传成功`);
+      if(info.file.response.Message === 'success'){
+        message.success(`${info.file.name} 上传成功`);
+        currentImgUrl=info.file.response.Data;
+        handleOk();
+      }else {
+        message.error(`${info.file.name} 上传失败`);
+      }
     } else if (info.file.status === 'error') {
       message.error(`${info.file.name} 上传失败`);
     }
