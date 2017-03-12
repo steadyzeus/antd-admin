@@ -171,6 +171,58 @@ export default {
         current: 1,
         total: null
       }},
+    daikuan:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    danbao:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    grdanbao:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    podanbao:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
     loading: false,
     currentContent:"添加新客户信息",
     Name:""
@@ -467,6 +519,58 @@ export default {
             total: null
           }},
         gudingzichan:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        daikuan:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        danbao:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        grdanbao:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        podanbao:{
           list:[],
           second:0,
           currentItem: {},

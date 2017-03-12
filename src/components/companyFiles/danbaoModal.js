@@ -47,7 +47,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建个人担保信息' : '修改个人担保信息'}`,
+    title: `${type === 'create' ? '新建企业担保信息' : '修改企业担保信息'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -90,7 +90,7 @@ const modal = ({
   }
 
   const props = {
-    action: '/InputSystem/DataService/api/v1/upload/grdanbao/'+item.KeyID,
+    action: '/InputSystem/DataService/api/v1/upload/danbao/'+item.KeyID,
     listType: 'picture',
     defaultFileList: [...fileList],
     className: 'upload-list-inline',

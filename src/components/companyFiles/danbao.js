@@ -77,10 +77,14 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '贷款日期',
-        dataIndex: 'LoanDate',
-        key: 'LoanDate',
+        title: '担保日期',
+        dataIndex: 'GuaranteeDate',
+        key: 'GuaranteeDate',
         render: (text) => <span>{new Date(text).toLocaleString()}</span>
+      }, {
+        title: '被担保人',
+        dataIndex: 'Guarantor',
+        key: 'Guarantor'
       }, {
         title: '金额',
         dataIndex: 'Account',
@@ -128,14 +132,14 @@ class zhangcheng extends React.Component {
               marginRight: 4
             }}>编辑</a>
             {/*<Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>
-              <a>删除</a>
-            </Popconfirm>*/}
+             <a>删除</a>
+             </Popconfirm>*/}
           </p>
         )
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>企业贷款信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加企业贷款信息</Button>
+      <span className={styles.title}>企业担保信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加企业担保信息</Button>
       <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }

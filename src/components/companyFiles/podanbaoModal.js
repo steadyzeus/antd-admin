@@ -2,6 +2,12 @@ import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker, TimePicker} from 'antd'
 const FormItem = Form.Item
 import { Upload, Button, Icon,message } from 'antd';
+
+import moment from 'moment';
+
+// It's recommended to set locale in entry file globaly.
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 const formItemLayout = {
   labelCol: {
     span: 6
@@ -41,7 +47,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建配偶担保信息' : '修改配偶担保信息'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -102,49 +108,71 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Name', {
-            initialValue: item.Name,
+        <FormItem label='担保日期：' hasFeedback {...formItemLayout} >
+          {getFieldDecorator('GuaranteeDate', {
+            initialValue: moment(item.GuaranteeDate) || moment(new Date()),
             rules: [
               {
-                required: true,
-                message: '请填写姓名'
+                required: false,
+                message: '请填写担保日期'
+              }
+            ]
+          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
+        </FormItem>
+        <FormItem label='被担保人：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Guarantor', {
+            initialValue: item.Guarantor,
+            rules: [
+              {
+                required: false,
+                message: '请填被担保人'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='验资/认缴：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BankRoll', {
-            initialValue: item.BankRoll,
+        <FormItem label='金额：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Account', {
+            initialValue: item.Account,
             rules: [
               {
                 required: false,
-                message: '请填验资/认缴'
+                message: '请填金额'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Owner', {
-            initialValue: item.Owner,
+        <FormItem label='状态' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Status', {
+            initialValue: item.Status,
             rules: [
               {
                 required: false,
-                message: '请填写金额'
+                message: '请填写状态'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='百分比：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Partner', {
-            initialValue: item.Partner,
+        <FormItem label='余额：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Balance', {
+            initialValue: item.Balance,
             rules: [
               {
                 required: false,
-                message: '请填百分比'
+                message: '请填余额'
               }
             ]
           })(<Input />)}
+        </FormItem>
+        <FormItem label='截止日期：' hasFeedback {...formItemLayout} >
+          {getFieldDecorator('OverDate', {
+            initialValue: moment(item.OverDate) || moment(new Date()),
+            rules: [
+              {
+                required: false,
+                message: '请填写合同日期'
+              }
+            ]
+          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
         </FormItem>
       </Form>
       {type=="create"?[]:upload}
