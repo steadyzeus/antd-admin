@@ -41,7 +41,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建工资信息' : '修改工资信息'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -102,46 +102,24 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Name', {
-            initialValue: item.Name,
+        <FormItem label='月份：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Month', {
+            initialValue: item.Month,
             rules: [
               {
                 required: true,
-                message: '请填写姓名'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='验资/认缴：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BankRoll', {
-            initialValue: item.BankRoll,
-            rules: [
-              {
-                required: false,
-                message: '请填验资/认缴'
+                message: '请填写月份'
               }
             ]
           })(<Input />)}
         </FormItem>
         <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Owner', {
-            initialValue: item.Owner,
+          {getFieldDecorator('Account', {
+            initialValue: item.Account,
             rules: [
               {
                 required: false,
                 message: '请填写金额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='百分比：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Partner', {
-            initialValue: item.Partner,
-            rules: [
-              {
-                required: false,
-                message: '请填百分比'
               }
             ]
           })(<Input />)}

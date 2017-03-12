@@ -77,22 +77,11 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '姓名',
+        title: '名称',
         dataIndex: 'Name',
-        key: 'Name',
-      }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
-      }, {
-        title: '金额',
-        dataIndex: 'Owner',
-        key: 'Owner'
-      }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
-      },  {
+        key: 'Name'
+      },
+        {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
@@ -129,7 +118,7 @@ class zhangcheng extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>应付账款</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加应付账款</Button>
+      <span className={styles.title}>安全许可证</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加安全许可证</Button>
       <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }

@@ -77,22 +77,34 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '姓名',
-        dataIndex: 'Name',
-        key: 'Name',
+        title: '月份',
+        dataIndex: 'Month',
+        key: 'Month',
       }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
+        title: '国税',
+        dataIndex: 'CountryTax',
+        key: 'CountryTax'
       }, {
-        title: '金额',
-        dataIndex: 'Owner',
-        key: 'Owner'
+        title: '地税',
+        dataIndex: 'LocalTax',
+        key: 'LocalTax'
       }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
-      },  {
+        title: '所得税',
+        dataIndex: 'IncomeTax',
+        key: 'IncomeTax'
+      }, {
+        title: '印花税',
+        dataIndex: 'StampTax',
+        key: 'StampTax'
+      },   {
+        title: '价调基金',
+        dataIndex: 'AdjustFund',
+        key: 'AdjustFund'
+      },   {
+        title: '个人所得税',
+        dataIndex: 'PersonalTax',
+        key: 'PersonalTax'
+      },    {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
@@ -129,7 +141,7 @@ class zhangcheng extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>应付账款</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加应付账款</Button>
+      <span className={styles.title}>税务信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加税务信息</Button>
       <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }

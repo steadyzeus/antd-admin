@@ -77,21 +77,13 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '姓名',
-        dataIndex: 'Name',
-        key: 'Name',
-      }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
+        title: '月份',
+        dataIndex: 'Month',
+        key: 'Month',
       }, {
         title: '金额',
-        dataIndex: 'Owner',
-        key: 'Owner'
-      }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
+        dataIndex: 'Account',
+        key: 'Account'
       }, {
         title: '扫描文件',
         dataIndex: 'ScanFile',
@@ -122,14 +114,14 @@ class zhangcheng extends React.Component {
               marginRight: 4
             }}>编辑</a>
             {/*<Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>
-              <a>删除</a>
-            </Popconfirm>*/}
+             <a>删除</a>
+             </Popconfirm>*/}
           </p>
         )
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>应付账款</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加应付账款</Button>
+      <span className={styles.title}>社保信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加社保信息</Button>
       <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }

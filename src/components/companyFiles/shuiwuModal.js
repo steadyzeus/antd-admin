@@ -40,7 +40,7 @@ const modal = ({
     })
   }
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建税务信息' : '修改税务信息'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -101,20 +101,20 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Name', {
-            initialValue: item.Name,
+        <FormItem label='月份：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Month', {
+            initialValue: item.Month,
             rules: [
               {
                 required: true,
-                message: '请填写姓名'
+                message: '请填写月份'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='验资/认缴：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BankRoll', {
-            initialValue: item.BankRoll,
+        <FormItem label='国税：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('CountryTax', {
+            initialValue: item.CountryTax,
             rules: [
               {
                 required: false,
@@ -123,9 +123,9 @@ const modal = ({
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Owner', {
-            initialValue: item.Owner,
+        <FormItem label='地税' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('LocalTax', {
+            initialValue: item.LocalTax,
             rules: [
               {
                 required: false,
@@ -134,13 +134,46 @@ const modal = ({
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='百分比：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Partner', {
-            initialValue: item.Partner,
+        <FormItem label='所得税：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('IncomeTax', {
+            initialValue: item.IncomeTax,
             rules: [
               {
                 required: false,
                 message: '请填百分比'
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem label='印花税：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('StampTax', {
+            initialValue: item.StampTax,
+            rules: [
+              {
+                required: false,
+                message: '请填印花税'
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem label='价调基金：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('AdjustFund', {
+            initialValue: item.AdjustFund,
+            rules: [
+              {
+                required: false,
+                message: '请填价调基金'
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem label='个人所得税：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('PersonalTax', {
+            initialValue: item.PersonalTax,
+            rules: [
+              {
+                required: false,
+                message: '请填个人所得税'
               }
             ]
           })(<Input />)}

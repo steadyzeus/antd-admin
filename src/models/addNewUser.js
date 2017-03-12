@@ -223,6 +223,71 @@ export default {
         current: 1,
         total: null
       }},
+    aqscxkz:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    khxkz:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    shuiwu:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    gongzi:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    shebao:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
     loading: false,
     currentContent:"添加新客户信息",
     Name:""
@@ -583,6 +648,71 @@ export default {
             current: 1,
             total: null
           }},
+        aqscxkz:{
+        list:[],
+          second:0,
+          currentItem: {},
+        modalVisible: false,
+          modalType: 'create',
+          pagination: {
+          showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+        }},
+      khxkz:{
+        list:[],
+          second:0,
+          currentItem: {},
+        modalVisible: false,
+          modalType: 'create',
+          pagination: {
+          showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+        }},
+      shuiwu:{
+        list:[],
+          second:0,
+          currentItem: {},
+        modalVisible: false,
+          modalType: 'create',
+          pagination: {
+          showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+        }},
+      gongzi:{
+        list:[],
+          second:0,
+          currentItem: {},
+        modalVisible: false,
+          modalType: 'create',
+          pagination: {
+          showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+        }},
+      shebao:{
+        list:[],
+          second:0,
+          currentItem: {},
+        modalVisible: false,
+          modalType: 'create',
+          pagination: {
+          showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+        }},
         loading: false,
         currentContent:"添加新客户信息",
         Name:""
