@@ -69,29 +69,37 @@ class zhangcheng extends React.Component {
 
   render () {
     const {
+      second,
       dataSource,
       pagination,
       onAdd,
       onDeleteItem,
       onEditItem
     } = this.props
+    let currentDataSource=[];
+    for(let item of dataSource){
+      if(item.Timing!=null && item.Timing==second){
+        currentDataSource.push(item);
+      }
+    }
     const columns = [
       {
-        title: '姓名',
-        dataIndex: 'Name',
-        key: 'Name',
+        title: '存货名称',
+        dataIndex: 'StockName',
+        key: 'StockName',
       }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
+        title: '账面价值',
+        dataIndex: 'BookValue',
+        key: 'BookValue'
       }, {
-        title: '金额',
-        dataIndex: 'Owner',
-        key: 'Owner'
-      }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
+        title: '市场价值',
+        dataIndex: 'MarketValue',
+        key: 'MarketValue'
+      },{
+        title: '扫描文件',
+        dataIndex: 'ScanFile',
+        key: 'ScanFile',
+        render: (text) => <a target="_blank" href={text?("http://p.cdito.cn:8118"+text):"javascript:void(0)"} >{text?"点击查看图片":"请点击编辑上传图片"}</a>
       }, {
         title: '贷款编号',
         dataIndex: 'LoanId',
@@ -123,9 +131,9 @@ class zhangcheng extends React.Component {
         )
       }
     ]
-    return <div>
-      <span>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
-      <Table className={styles.table8} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+    return <div className={styles.marginBottom}>
+      <span className={styles.title}>存货信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd(second)}>添加存货信息</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={currentDataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }

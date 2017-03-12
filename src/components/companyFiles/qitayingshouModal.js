@@ -1,7 +1,14 @@
 import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker, TimePicker} from 'antd'
 const FormItem = Form.Item
+import { Upload, Button, Icon,message } from 'antd';
 
+
+import moment from 'moment';
+
+// It's recommended to set locale in entry file globaly.
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 const formItemLayout = {
   labelCol: {
     span: 6
@@ -13,6 +20,7 @@ const formItemLayout = {
 
 const modal = ({
   visible,
+  second,
   type,
   item = {},
   onOk,
@@ -30,48 +38,94 @@ const modal = ({
       }
       const data = {
         ...getFieldsValue(),
-        key: item.key
+        key: item.key,
+        Timing:second
       }
       onOk(data)
     })
   }
-
   const modalOpts = {
-    title: `${type === 'create' ? '新建公司工商基本信息' : '修改公司工商基本信息'}`,
+    title: `${type === 'create' ? '新建其他应收款' : '修改其他应收款'}`,
     visible,
     onOk: handleOk,
     onCancel,
     wrapClassName: 'vertical-center-modal'
   }
+  const fileList = [];
 
+  if(item.ScanFile){
+    let file= {
+      uid: item.KeyID,
+      name: item.ScanFile,
+      status: 'done',
+      url: 'http://p.cdito.cn:8118'+item.ScanFile,
+      thumbUrl: 'http://p.cdito.cn:8118'+item.ScanFile,
+    }
+    fileList.push(file);
+  }
+
+  function handleChange (info){
+    let fileListNow = info.fileList;
+    let lastFile = fileListNow[(fileListNow.length-1)?(fileListNow.length-1):0] ;
+
+    let firstFile=fileListNow[0];
+    if (firstFile.status == "done") {
+      fileListNow.shift();
+    }
+
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} 上传成功`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} 上传失败`);
+    }
+
+  }
+
+  const props = {
+    action: '/InputSystem/DataService/api/v1/upload/gongshang/'+item.KeyID,
+    listType: 'picture',
+    defaultFileList: [...fileList],
+    className: 'upload-list-inline',
+    onChange: handleChange
+  };
+
+  const upload=<div style={{paddingLeft: "8px"}}>
+    <Upload {...props}>
+      <Button>
+        <Icon type="upload" />上传图片
+      </Button>
+    </Upload>
+    <div style={{marginTop:"10px",color:'red'}}>注意：只允许上传一张图片，第二次上传会覆盖上一张</div>
+  </div>;
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
+        <FormItem label='名称：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('Name', {
             initialValue: item.Name,
             rules: [
               {
                 required: true,
-                message: '请填写姓名'
+                message: '请填写名称'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='验资/认缴：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BankRoll', {
-            initialValue: item.BankRoll,
+        <FormItem label='日期：' hasFeedback {...formItemLayout} >
+          {getFieldDecorator('OtherDate', {
+            initialValue: moment(item.OtherDate) || moment(new Date()),
             rules: [
               {
                 required: false,
-                message: '请填验资/认缴'
+                message: '请填写日期'
               }
             ]
-          })(<Input />)}
+          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
         </FormItem>
+
         <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Owner', {
-            initialValue: item.Owner,
+          {getFieldDecorator('OtherAccount', {
+            initialValue: item.OtherAccount,
             rules: [
               {
                 required: false,
@@ -80,18 +134,19 @@ const modal = ({
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='百分比：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Partner', {
-            initialValue: item.Partner,
+        <FormItem label='形成原因：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Reason', {
+            initialValue: item.Reason,
             rules: [
               {
                 required: false,
-                message: '请填百分比'
+                message: '请填形成原因'
               }
             ]
           })(<Input />)}
         </FormItem>
       </Form>
+      {type=="create"?[]:upload}
     </Modal>
   )
 }

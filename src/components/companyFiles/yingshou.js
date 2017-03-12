@@ -69,12 +69,20 @@ class yingshou extends React.Component {
 
   render () {
     const {
+      second,
       dataSource,
       pagination,
       onAdd,
       onDeleteItem,
       onEditItem
     } = this.props
+    let currentDataSource=[];
+    for(let item of dataSource){
+      if(item.Timing!=null && item.Timing==second){
+        currentDataSource.push(item);
+      }
+    }
+
     const columns = [
       {
         title: '客户名称',
@@ -100,7 +108,8 @@ class yingshou extends React.Component {
       }, {
         title: '扫描文件',
         dataIndex: 'ScanFile',
-        key: 'ScanFile'
+        key: 'ScanFile',
+        render: (text) => <a target="_blank" href={text?("http://p.cdito.cn:8118"+text):"javascript:void(0)"} >{text?"点击查看图片":"请点击编辑上传图片"}</a>
       },{
         title: '贷款编号',
         dataIndex: 'LoanId',
@@ -122,7 +131,7 @@ class yingshou extends React.Component {
         width: 100,
         render: (text, record) => (
           <p>
-            <a onClick={() => onEditItem(record)} style={{
+            <a onClick={() => onEditItem(record,second)} style={{
               marginRight: 4
             }}>编辑</a>
             {/*<Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.id)}>
@@ -133,8 +142,8 @@ class yingshou extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>应收账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加应收账款</Button>
-      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <span className={styles.title}>应收账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd(second)}>添加应收账款</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={currentDataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }

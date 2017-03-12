@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker, TimePicker} from 'antd'
 const FormItem = Form.Item
-
+import { Upload, Button, Icon,message } from 'antd';
 import moment from 'moment';
 
 // It's recommended to set locale in entry file globaly.
@@ -19,6 +19,7 @@ const formItemLayout = {
 
 const modal = ({
   visible,
+  second,
   type,
   item = {},
   onOk,
@@ -29,6 +30,7 @@ const modal = ({
     getFieldsValue
   }
 }) => {
+  let currentImgUrl="";
   function handleOk () {
     validateFields((errors) => {
       if (errors) {
@@ -36,7 +38,9 @@ const modal = ({
       }
       const data = {
         ...getFieldsValue(),
-        key: item.key
+        key: item.key,
+        Timing:second,
+        ScanFile:currentImgUrl
       }
       onOk(data)
     })
@@ -49,7 +53,59 @@ const modal = ({
     onCancel,
     wrapClassName: 'vertical-center-modal'
   }
+  const fileList = [];
 
+  if(item.ScanFile){
+    let file= {
+      uid: item.KeyID,
+      name: item.ScanFile,
+      status: 'done',
+      url: 'http://p.cdito.cn:8118'+item.ScanFile,
+      thumbUrl: 'http://p.cdito.cn:8118'+item.ScanFile,
+    }
+    fileList.push(file);
+  }
+
+  function handleChange (info){
+    let fileListNow = info.fileList;
+    let lastFile = fileListNow[(fileListNow.length-1)?(fileListNow.length-1):0] ;
+
+    let firstFile=fileListNow[0];
+    if (firstFile.status == "done") {
+      fileListNow.shift();
+    }
+
+    if (info.file.status === 'done') {
+      if(info.file.response.Message === 'success'){
+        message.success(`${info.file.name} 上传成功`);
+        currentImgUrl=info.file.response.Data;
+        handleOk();
+        console.log(url,"url");
+      }else {
+        message.error(`${info.file.name} 上传失败`);
+      }
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} 上传失败`);
+    }
+
+  }
+
+  const props = {
+    action: '/InputSystem/DataService/api/v1/upload/yingshou/'+item.KeyID,
+    listType: 'picture',
+    defaultFileList: [...fileList],
+    className: 'upload-list-inline',
+    onChange: handleChange
+  };
+
+  const upload=<div style={{paddingLeft: "8px"}}>
+    <Upload {...props}>
+      <Button>
+        <Icon type="upload" />上传图片
+      </Button>
+    </Upload>
+    <div style={{marginTop:"10px",color:'red'}}>注意：只允许上传一张图片，第二次上传会覆盖上一张</div>
+  </div>;
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
@@ -109,6 +165,7 @@ const modal = ({
           })(<Input />)}
         </FormItem>
       </Form>
+      {type=="create"?[]:upload}
     </Modal>
   )
 }

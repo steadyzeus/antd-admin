@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker, TimePicker} from 'antd'
 const FormItem = Form.Item
-
+import { Upload, Button, Icon,message } from 'antd';
 const formItemLayout = {
   labelCol: {
     span: 6
@@ -43,7 +43,52 @@ const modal = ({
     onCancel,
     wrapClassName: 'vertical-center-modal'
   }
+  const fileList = [];
 
+  if(item.ScanFile){
+    let file= {
+      uid: item.KeyID,
+      name: item.ScanFile,
+      status: 'done',
+      url: 'http://p.cdito.cn:8118'+item.ScanFile,
+      thumbUrl: 'http://p.cdito.cn:8118'+item.ScanFile,
+    }
+    fileList.push(file);
+  }
+
+  function handleChange (info){
+    let fileListNow = info.fileList;
+    let lastFile = fileListNow[(fileListNow.length-1)?(fileListNow.length-1):0] ;
+
+    let firstFile=fileListNow[0];
+    if (firstFile.status == "done") {
+      fileListNow.shift();
+    }
+
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} 上传成功`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} 上传失败`);
+    }
+
+  }
+
+  const props = {
+    action: '/InputSystem/DataService/api/v1/upload/daikuan/'+item.KeyID,
+    listType: 'picture',
+    defaultFileList: [...fileList],
+    className: 'upload-list-inline',
+    onChange: handleChange
+  };
+
+  const upload=<div style={{paddingLeft: "8px"}}>
+    <Upload {...props}>
+      <Button>
+        <Icon type="upload" />上传图片
+      </Button>
+    </Upload>
+    <div style={{marginTop:"10px",color:'red'}}>注意：只允许上传一张图片，第二次上传会覆盖上一张</div>
+  </div>;
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
@@ -92,6 +137,7 @@ const modal = ({
           })(<Input />)}
         </FormItem>
       </Form>
+      {type=="create"?[]:upload}
     </Modal>
   )
 }

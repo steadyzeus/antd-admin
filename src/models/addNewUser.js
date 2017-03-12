@@ -69,6 +69,7 @@ export default {
       }},
     yingshou:{
       list:[],
+      second:0,
       currentItem: {},
       modalVisible: false,
       modalType: 'create',
@@ -81,6 +82,7 @@ export default {
       }},
     yingfu:{
       list:[],
+      second:0,
       currentItem: {},
       modalVisible: false,
       modalType: 'create',
@@ -93,6 +95,7 @@ export default {
       }},
     yufu:{
       list:[],
+      second:0,
       currentItem: {},
       modalVisible: false,
       modalType: 'create',
@@ -105,6 +108,59 @@ export default {
       }},
     yushou:{
       list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    qitayingshou:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    qitayingfu:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    cunhuo:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    gudingzichan:{
+      list:[],
+      second:0,
       currentItem: {},
       modalVisible: false,
       modalType: 'create',
@@ -321,6 +377,7 @@ export default {
           }},
         yingshou:{
           list:[],
+          second:0,
           currentItem: {},
           modalVisible: false,
           modalType: 'create',
@@ -333,6 +390,7 @@ export default {
           }},
         yingfu:{
           list:[],
+          second:0,
           currentItem: {},
           modalVisible: false,
           modalType: 'create',
@@ -345,6 +403,7 @@ export default {
           }},
         yufu:{
           list:[],
+          second:0,
           currentItem: {},
           modalVisible: false,
           modalType: 'create',
@@ -357,6 +416,59 @@ export default {
           }},
         yushou:{
           list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        qitayingshou:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        qitayingfu:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        cunhuo:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        gudingzichan:{
+          list:[],
+          second:0,
           currentItem: {},
           modalVisible: false,
           modalType: 'create',

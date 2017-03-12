@@ -69,12 +69,19 @@ class yufu extends React.Component {
 
   render () {
     const {
+      second,
       dataSource,
       pagination,
       onAdd,
       onDeleteItem,
       onEditItem
     } = this.props
+    let currentDataSource=[];
+    for(let item of dataSource){
+      if(item.Timing!=null && item.Timing==second){
+        currentDataSource.push(item);
+      }
+    }
     const columns = [
       {
         title: '供应商名称',
@@ -92,7 +99,8 @@ class yufu extends React.Component {
       },  {
         title: '扫描文件',
         dataIndex: 'ScanFile',
-        key: 'ScanFile'
+        key: 'ScanFile',
+        render: (text) => <a target="_blank" href={text?("http://p.cdito.cn:8118"+text):"javascript:void(0)"} >{text?"点击查看图片":"请点击编辑上传图片"}</a>
       },{
         title: '贷款编号',
         dataIndex: 'LoanId',
@@ -125,8 +133,8 @@ class yufu extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>预付账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加预付账款</Button>
-      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <span className={styles.title}>预付账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd(second)}>添加预付账款</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={currentDataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }

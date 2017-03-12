@@ -66,32 +66,44 @@ class zhangcheng extends React.Component {
     await this.props.onPageChange(pagination)
     this.newPage = pagination.current
   }
-
   render () {
     const {
+      second,
       dataSource,
       pagination,
       onAdd,
       onDeleteItem,
       onEditItem
     } = this.props
+    let currentDataSource=[];
+    for(let item of dataSource){
+      if(item.Timing!=null && item.Timing==second){
+        currentDataSource.push(item);
+      }
+    }
     const columns = [
       {
-        title: '姓名',
+        title: '名称',
         dataIndex: 'Name',
         key: 'Name',
       }, {
-        title: '验资/认缴',
-        dataIndex: 'BankRoll',
-        key: 'BankRoll'
+        title: '日期',
+        dataIndex: 'OtherDate',
+        key: 'OtherDate',
+        render: (text) => <span>{new Date(text).toLocaleString()}</span>
       }, {
         title: '金额',
-        dataIndex: 'Owner',
-        key: 'Owner'
+        dataIndex: 'OtherAccount',
+        key: 'OtherAccount'
       }, {
-        title: '百分比',
-        dataIndex: 'Partner',
-        key: 'Partner'
+        title: '形成原因',
+        dataIndex: 'Reason',
+        key: 'Reason'
+      },{
+        title: '扫描文件',
+        dataIndex: 'ScanFile',
+        key: 'ScanFile',
+        render: (text) => <a target="_blank" href={text?("http://p.cdito.cn:8118"+text):"javascript:void(0)"} >{text?"点击查看图片":"请点击编辑上传图片"}</a>
       }, {
         title: '贷款编号',
         dataIndex: 'LoanId',
@@ -123,9 +135,9 @@ class zhangcheng extends React.Component {
         )
       }
     ]
-    return <div>
-      <span>2.公司章程正本</span><Button className={styles.marginLeft15} type="primary" onClick={onAdd}>添加公司章程正本</Button>
-      <Table className={styles.table8} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+    return <div className={styles.marginBottom}>
+      <span className={styles.title}>其他应收款</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd(second)}>添加其他应收款</Button>
+      <Table  bordered className={styles.marginTop15} columns={columns} dataSource={currentDataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
