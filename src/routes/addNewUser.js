@@ -41,8 +41,8 @@ import KhxkzModal from '../components/companyFiles/khxkzModal'
 import Khxkz from '../components/companyFiles/khxkz'
 import ShuiwuModal from '../components/companyFiles/shuiwuModal'
 import Shuiwu from '../components/companyFiles/shuiwu'
-import GongziModal from '../components/companyFiles/gongziModal'
-import Gongzi from '../components/companyFiles/gongzi'
+import QylsModal from '../components/companyFiles/qylsModal'
+import Qyls from '../components/companyFiles/qyls'
 import ShebaoModal from '../components/companyFiles/shebaoModal'
 import Shebao from '../components/companyFiles/shebao'
 
@@ -51,7 +51,7 @@ const Panel = Collapse.Panel;
 const TabPane = Tabs.TabPane;
 
 function AddNewUser ({ location, dispatch, addNewUser }) {
-  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,shuiwu,gongzi,shebao} = addNewUser;
+  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,shuiwu,qyls,shebao} = addNewUser;
   /*const { field, keyword } = location.query*/
   const shebaoModalProps = {
     item: shebao.modalType === 'create' ? {} : shebao.currentItem,
@@ -120,28 +120,28 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
   }
 
 
-  const gongziModalProps = {
-    item: gongzi.modalType === 'create' ? {} : gongzi.currentItem,
-    type: gongzi.modalType,
-    visible: gongzi.modalVisible,
+  const qylsModalProps = {
+    item: qyls.modalType === 'create' ? {} : qyls.currentItem,
+    type: qyls.modalType,
+    visible: qyls.modalVisible,
     onOk (data) {
       dispatch({
-        type: `addNewUser/${gongzi.modalType}`,
-        payload: {data:data,bizName:'gongzi',gongshangID:gongshang.list[0].KeyID}
+        type: `addNewUser/${qyls.modalType}`,
+        payload: {data:data,bizName:'qyls',gongshangID:gongshang.list[0].KeyID}
       })
     },
     onCancel () {
       dispatch({
         type: 'addNewUser/hideModal',
-        payload: {bizName:'gongzi'}
+        payload: {bizName:'qyls'}
       })
     }
   }
 
-  const gongziProps = {
-    dataSource: gongzi.list,
+  const qylsProps = {
+    dataSource: qyls.list,
     loading,
-    pagination: gongzi.pagination,
+    pagination: qyls.pagination,
     onPageChange (page) {
       const { query, pathname } = location
       dispatch(routerRedux.push({
@@ -150,15 +150,15 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
           ...query,
           page: page.current,
           pageSize: page.pageSize,
-          dataType:'gongzi',
-          bizName:'gongzi'
+          dataType:'qyls',
+          bizName:'qyls'
         }
       }))
     },
     onDeleteItem (id) {
       dispatch({
         type: 'addNewUser/delete',
-        payload: {id:id,bizName:'gongzi'}
+        payload: {id:id,bizName:'qyls'}
       })
     },
     onEditItem (item) {
@@ -167,7 +167,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
         payload: {
           modalType: 'update',
           currentItem: item,
-          bizName:'gongzi'
+          bizName:'qyls'
         }
       })
     },
@@ -180,10 +180,25 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
           type: 'addNewUser/showModal',
           payload: {
             modalType: 'create',
-            bizName:'gongzi'
+            bizName:'qyls'
           }
         })
-      }}
+      }},
+    onExcelAdd(data){
+        let listArrayData=data;
+        dispatch({
+          type: 'addNewUser/queryExcelSuccess',
+          payload: {
+            list: listArrayData,
+            pagination: {
+              total: listArrayData.length,
+              current: 1
+            },
+            bizName:'qyls'
+          }
+        })
+    }
+
   }
 
   const shuiwuModalProps = {
@@ -1533,7 +1548,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
 
 
   const UserModalGen = () =>
-  <div><ShebaoModal {...shebaoModalProps}/><GongziModal {...gongziModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
+  <div><ShebaoModal {...shebaoModalProps}/><QylsModal {...qylsModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
     <KhxkzModal {...khxkzModalProps}/>
     <AqscxkzModal {...aqscxkzModalProps}/>
     <PodanbaoModal {...podanbaoModalProps}/><GrdanbaoModal {...grdanbaoModalProps}/><DanbaoModal {...danbaoModalProps}/><DaikuanModal {...daikuanModalProps}/><GudingzichanModal {...gudingzichanModalProps}/><CunhuoModal {...cunhuoModalProps}/><QitayingfuModal {...qitayingfuModalProps}/><QitayingshouModal {...qitayingshouModalProps}/><YufuModal {...yufuModalProps}/><YushouModal {...yushouModalProps}/><YingfuModal {...yingfuModalProps}/><YingshouModal {...yingshouModalProps}/><GerenfayuanModal {...gerenfayuanModalProps}/><FayuanModal {...fayuanModalProps}/><ZizhiModal Modal {...zizhiModalProps}/><ZhangchengModal {...zhangchengModalProps}/>< CompanyBaseInfoModal{...companyBaseInfoModalProps}/></div>
@@ -1587,7 +1602,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
             </Panel>
             <Panel header="8.企业基本户一年流水" key="8">
               <Shuiwu {...shuiwuProps}/>
-              <Gongzi {...gongziProps}/>
+              <Qyls {...qylsProps}/>
               <Shebao {...shebaoProps}/>
             </Panel>
           </Collapse>

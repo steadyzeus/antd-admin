@@ -262,7 +262,7 @@ export default {
         current: 1,
         total: null
       }},
-    gongzi:{
+    qyls:{
       list:[],
       second:0,
       currentItem: {},
@@ -687,7 +687,7 @@ export default {
             current: 1,
             total: null
         }},
-      gongzi:{
+      qyls:{
         list:[],
           second:0,
           currentItem: {},
@@ -728,6 +728,17 @@ export default {
       const {list, pagination, bizName} = action.payload
       return {
         ...state, loading: false,[bizName]:{...state[bizName],list:[...state[bizName].list,list],
+          pagination: {
+            ...state.pagination,
+            ...pagination
+          }}
+      }
+    },
+    queryExcelSuccess (state, action) {
+      debugger;
+      const {list, pagination, bizName} = action.payload
+      return {
+        ...state, loading: false,[bizName]:{...state[bizName],list:[...state[bizName].list,...list],
           pagination: {
             ...state.pagination,
             ...pagination
