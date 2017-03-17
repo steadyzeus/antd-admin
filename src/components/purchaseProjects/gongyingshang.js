@@ -4,7 +4,7 @@ import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
 const Mock = require('mockjs')
 
-class fayuan extends React.Component {
+class yingshou extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -69,26 +69,56 @@ class fayuan extends React.Component {
 
   render () {
     const {
+      second,
       dataSource,
       pagination,
       onAdd,
       onDeleteItem,
       onEditItem
     } = this.props
+    let currentDataSource=[];
+    for(let item of dataSource){
+      if(item.SupplierType!=null && item.SupplierType==second){
+        currentDataSource.push(item);
+      }
+    }
+
     const columns = [
       {
-        title: '公司名称',
-        dataIndex: 'Name',
-        key: 'Name',
+        title: '项目名称',
+        dataIndex: 'ProjectName',
+        key: 'ProjectName',
       }, {
-        title: '统一代码证',
-        dataIndex: 'Code',
-        key: 'Code'
+        title: '供应商名称',
+        dataIndex: 'SupplierName',
+        key: 'SupplierName'
       }, {
-        title: '有无法院执行信息',
-        dataIndex: 'Law',
-        key: 'Law'
+        title: '产品',
+        dataIndex: 'Product',
+        key: 'Product'
+      }, {
+        title: '单价',
+        dataIndex: 'UnitPrice',
+        key: 'UnitPrice'
+      }, {
+        title: '付款时间',
+        dataIndex: 'PayTime',
+        key: 'PayTime',
+        render: (text) => <span>{new Date(text).toLocaleString()}</span>
       },  {
+        title: '预付款金额',
+        dataIndex: 'PrePayMoney',
+        key: 'PrePayMoney'
+      }, {
+        title: '付款方式',
+        dataIndex: 'PayWay',
+        key: 'PayWay'
+      },{
+        title: '实际付款时间',
+        dataIndex: 'ActualPayTime',
+        key: 'ActualPayTime',
+        render: (text) => <span>{new Date(text).toLocaleString()}</span>
+      }, {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
@@ -114,7 +144,7 @@ class fayuan extends React.Component {
         width: 100,
         render: (text, record) => (
           <p>
-            <a onClick={() => onEditItem(record)} style={{
+            <a onClick={() => onEditItem(record,second)} style={{
               marginRight: 4
             }}>编辑</a>
             <Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.KeyID)}>
@@ -125,10 +155,10 @@ class fayuan extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>法院执行信息</span><Button className={styles.marginLeft15} icon="plus" type="primary" onClick={onAdd}>添加法院执行信息</Button>
-      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <span className={styles.title}>{second?"下"+"游采购合同（3份以上）":"上"+"游采购合同（3份以上）"}</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd(second)}>{second?"添加下"+"游采购合同（3份以上）":"添加上"+"游采购合同（3份以上）"}</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={currentDataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default fayuan
+export default yingshou

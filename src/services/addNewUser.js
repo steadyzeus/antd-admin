@@ -8,7 +8,7 @@ export async function queryBizName (params) {
 }
 
 export async function deleteBizNameByID (params) {
-  var data=JSON.stringify({'KeyID':params.record.KeyID,'BizName':'gongshang'});
+  var data=JSON.stringify({'KeyID':params.record.id,'BizName':params.record.bizName});
   return request('http://p.cdito.cn:8118/InputSystem/DataService/api/v1/delete', {
     method: 'post',
     data: JSON.stringify({'BizName':'gongshang','Data':data})

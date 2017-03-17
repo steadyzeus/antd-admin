@@ -44,7 +44,7 @@ function UsersManagement ({ location, dispatch, usersManagement }) {
     onDeleteItem (record) {
       dispatch({
         type: 'usersManagement/delete',
-        payload: record
+        payload: {id:record.KeyID,bizName:'gongshang'}
       })
     },
     onEditItem (item) {

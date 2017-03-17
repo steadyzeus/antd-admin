@@ -288,6 +288,19 @@ export default {
         current: 1,
         total: null
       }},
+    gongyingshang:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
     loading: false,
     currentContent:"添加新客户信息",
     Name:""
@@ -318,8 +331,12 @@ export default {
       const data = yield call(queryUserDetailsBygongshangID, parse(payload))
       if (data) {
         const allData=JSON.parse(data.Data);
-        let corpMaterial =allData.CorpMaterial.DataList;
+        let corpMaterial =allData.CorpMaterial.DataList,
+        BuyProject=allData.BuyProject.DataList,
+          PersonalMaterial=allData.PersonalMaterial.DataList,
+        OtherMaterial=allData.OtherMaterial.DataList;
         let corpObject={};
+        ///加上其他表
         for(let item of corpMaterial){
           corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
             modalVisible: false,
@@ -332,6 +349,42 @@ export default {
               total: null
             }};
         }
+        for(let item of BuyProject){
+          corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
+            modalVisible: false,
+            modalType: 'create',
+            pagination: {
+              showSizeChanger: true,
+              showQuickJumper: true,
+              showTotal: BuyProject => `共 ${BuyProject.length} 条`,
+              current: 1,
+              total: null
+            }};
+        }
+        /*for(let item of PersonalMaterial){
+          corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
+            modalVisible: false,
+            modalType: 'create',
+            pagination: {
+              showSizeChanger: true,
+              showQuickJumper: true,
+              showTotal: PersonalMaterial => `共 ${PersonalMaterial.length} 条`,
+              current: 1,
+              total: null
+            }};
+        }
+        for(let item of OtherMaterial){
+          corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
+            modalVisible: false,
+            modalType: 'create',
+            pagination: {
+              showSizeChanger: true,
+              showQuickJumper: true,
+              showTotal: OtherMaterial => `共 ${OtherMaterial.length} 条`,
+              current: 1,
+              total: null
+            }};
+        }*/
         yield put({
           type: 'queryAllDataSuccess',
           payload: {
@@ -343,18 +396,22 @@ export default {
         })
       }
     },
-    *'delete' ({ payload }, { call, put }) {
+    *'delete' ({ payload }, { select,call, put }) {
       yield put({ type: 'showLoading' })
-      const data = yield call(deleteBizNameByID, { id: payload })
-      if (data && data.success) {
+      const data = yield call(deleteBizNameByID, { record: payload })
+      const currentBizData = yield select(({ addNewUser }) => addNewUser[payload.bizName].list);
+
+      if (data && data.Message=="success") {
+        for(let index in currentBizData){
+          if(currentBizData[Number(index)].KeyID==payload.id){
+            currentBizData.splice(Number(index),1);
+          }
+        }
         yield put({
-          type: 'querySuccess',
+          type: 'deleteSuccess',
           payload: {
-            list: data.data,
-            pagination: {
-              total: data.page.total,
-              current: data.page.current
-            }
+            list: currentBizData,
+            bizName:payload.bizName
           }
         })
       }
@@ -392,7 +449,6 @@ export default {
       const currentItem = yield select(({ addNewUser }) => addNewUser[payload.bizName].currentItem);
       const newData = {...currentItem, ...payload.data }
       payload.newData=newData;
-      debugger;
       const data = yield call(updateBizName, payload)
       if (data && data.Message=="success") {
         const listData=JSON.parse(data.Data);
@@ -713,6 +769,19 @@ export default {
             current: 1,
             total: null
         }},
+        gongyingshang:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
         loading: false,
         currentContent:"添加新客户信息",
         Name:""
@@ -734,8 +803,13 @@ export default {
           }}
       }
     },
+    deleteSuccess(state,action){
+      const {list, bizName} = action.payload
+      return {
+        ...state, loading: false, [bizName]: {...state[bizName], list: list}
+      }
+    },
     queryExcelSuccess (state, action) {
-      debugger;
       const {list, pagination, bizName} = action.payload
       return {
         ...state, loading: false,[bizName]:{...state[bizName],list:[...state[bizName].list,...list],

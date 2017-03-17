@@ -45,14 +45,87 @@ import QylsModal from '../components/companyFiles/qylsModal'
 import Qyls from '../components/companyFiles/qyls'
 import ShebaoModal from '../components/companyFiles/shebaoModal'
 import Shebao from '../components/companyFiles/shebao'
+import GongyingshangModal from '../components/purchaseProjects/gongyingshangModal'
+import Gongyingshang from '../components/purchaseProjects/gongyingshang'
 
-import { Tabs, Icon,message,Tag,Collapse } from 'antd';
+import { Tabs, Icon,message,Tag,Collapse ,Spin} from 'antd';
 const Panel = Collapse.Panel;
 const TabPane = Tabs.TabPane;
 
 function AddNewUser ({ location, dispatch, addNewUser }) {
-  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,shuiwu,qyls,shebao} = addNewUser;
+  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,shuiwu,qyls,shebao,gongyingshang} = addNewUser;
   /*const { field, keyword } = location.query*/
+  const gongyingshangModalProps = {
+    second:gongyingshang.second,
+    item: gongyingshang.modalType === 'create' ? {} : gongyingshang.currentItem,
+    type: gongyingshang.modalType,
+    visible: gongyingshang.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${gongyingshang.modalType}`,
+        payload: {data:data,bizName:'gongyingshang',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'gongyingshang'}
+      })
+    }
+  }
+
+  const gongyingshangProps = {
+    dataSource: gongyingshang.list,
+    loading,
+    pagination: gongyingshang.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'gongyingshang',
+          bizName:'gongyingshang'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'gongyingshang'}
+      })
+    },
+    onEditItem (item,second) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'gongyingshang',
+          second:second
+        }
+      })
+    },
+    onAdd (second) {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'gongyingshang',
+            second:second
+          }
+        })
+      }}
+  }
+
+
+
   const shebaoModalProps = {
     item: shebao.modalType === 'create' ? {} : shebao.currentItem,
     type: shebao.modalType,
@@ -1548,7 +1621,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
 
 
   const UserModalGen = () =>
-  <div><ShebaoModal {...shebaoModalProps}/><QylsModal {...qylsModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
+  <div><GongyingshangModal {...gongyingshangModalProps}/><ShebaoModal {...shebaoModalProps}/><QylsModal {...qylsModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
     <KhxkzModal {...khxkzModalProps}/>
     <AqscxkzModal {...aqscxkzModalProps}/>
     <PodanbaoModal {...podanbaoModalProps}/><GrdanbaoModal {...grdanbaoModalProps}/><DanbaoModal {...danbaoModalProps}/><DaikuanModal {...daikuanModalProps}/><GudingzichanModal {...gudingzichanModalProps}/><CunhuoModal {...cunhuoModalProps}/><QitayingfuModal {...qitayingfuModalProps}/><QitayingshouModal {...qitayingshouModalProps}/><YufuModal {...yufuModalProps}/><YushouModal {...yushouModalProps}/><YingfuModal {...yingfuModalProps}/><YingshouModal {...yingshouModalProps}/><GerenfayuanModal {...gerenfayuanModalProps}/><FayuanModal {...fayuanModalProps}/><ZizhiModal Modal {...zizhiModalProps}/><ZhangchengModal {...zhangchengModalProps}/>< CompanyBaseInfoModal{...companyBaseInfoModalProps}/></div>
@@ -1556,6 +1629,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
   return (
     <div className='content-inner'>
       <Tag color="orange">{Name?(currentContent+"  企业名称："+Name):(currentContent)}</Tag>
+      <Spin spinning={loading} tip="请求数据中..." size="large">
       <Tabs defaultActiveKey="1">
         <TabPane tab={<span><Icon type="book" />企业资料</span>} key="1">
           <Collapse defaultActiveKey={['1']}>
@@ -1611,7 +1685,22 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
 
         </TabPane>
         <TabPane tab={<span><Icon type="laptop" />采购项目</span>} key="2">
-          Tab 2
+          <Collapse defaultActiveKey={['1']}>
+            <Panel header="1.中标通知书+签约合同" key="1">
+              <CompanyBaseInfo {...companyBaseInfoProps}/>
+            </Panel>
+            <Panel header="2.上下游采购合同(3份以上)" key="2">
+              <Gongyingshang {...gongyingshangProps} second={0}/>
+              <Gongyingshang {...gongyingshangProps} second={1}/>
+            </Panel>
+            <Panel header="3.过往业务中标书" key="3">
+
+            </Panel>
+            <Panel header="4.法院执行信息" key="4">
+
+            </Panel>
+          </Collapse>
+
         </TabPane>
         <TabPane tab={<span><Icon type="team" />个人资料</span>} key="3">
           Tab 3
@@ -1620,6 +1709,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
           Tab 4
         </TabPane>
       </Tabs>
+      </Spin>
       <UserModalGen />
     </div>
   )
