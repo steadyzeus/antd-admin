@@ -275,6 +275,19 @@ export default {
         current: 1,
         total: null
       }},
+    grls:{
+      list:[],
+      second:0,
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
     shebao:{
       list:[],
       second:0,
@@ -301,6 +314,187 @@ export default {
         current: 1,
         total: null
       }},
+    kehu:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    lszhongbiao:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    gysfayuan:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    gysfayuan:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    shenfenzheng:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    hukouben:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    jiehunzheng:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    grtyzhengxin:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    zhengxin:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    grdaikuan:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    podaikuan:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    xingyongka:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    poxingyongka:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    fangchan:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+    cheliang:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
+
     loading: false,
     currentContent:"添加新客户信息",
     Name:""
@@ -361,7 +555,7 @@ export default {
               total: null
             }};
         }
-        /*for(let item of PersonalMaterial){
+        for(let item of PersonalMaterial){
           corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
             modalVisible: false,
             modalType: 'create',
@@ -373,7 +567,7 @@ export default {
               total: null
             }};
         }
-        for(let item of OtherMaterial){
+        /*for(let item of OtherMaterial){
           corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
             modalVisible: false,
             modalType: 'create',
@@ -756,6 +950,19 @@ export default {
             current: 1,
             total: null
         }},
+        grls:{
+          list:[],
+          second:0,
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
       shebao:{
         list:[],
           second:0,
@@ -782,6 +989,176 @@ export default {
             current: 1,
             total: null
           }},
+        kehu:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        lszhongbiao:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        gysfayuan:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        shenfenzheng:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        hukouben:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        jiehunzheng:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        grtyzhengxin:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        zhengxin:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        grdaikuan:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        podaikuan:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        xingyongka:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        poxingyongka:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        fangchan:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        cheliang:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+
+
         loading: false,
         currentContent:"添加新客户信息",
         Name:""
@@ -796,7 +1173,7 @@ export default {
     queryCreatSuccess (state, action) {
       const {list, pagination, bizName} = action.payload
       return {
-        ...state, loading: false,[bizName]:{...state[bizName],list:[...state[bizName].list,list],
+        ...state, loading: false,[bizName]:{...state[bizName],list:[list,...state[bizName].list],
           pagination: {
             ...state.pagination,
             ...pagination
@@ -812,7 +1189,7 @@ export default {
     queryExcelSuccess (state, action) {
       const {list, pagination, bizName} = action.payload
       return {
-        ...state, loading: false,[bizName]:{...state[bizName],list:[...state[bizName].list,...list],
+        ...state, loading: false,[bizName]:{...state[bizName],list:[...list,...state[bizName].list],
           pagination: {
             ...state.pagination,
             ...pagination

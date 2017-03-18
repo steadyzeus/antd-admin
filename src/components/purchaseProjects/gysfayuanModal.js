@@ -90,7 +90,7 @@ const modal = ({
   }
 
   const props = {
-    action: '/InputSystem/DataService/api/v1/upload/daikuan/'+item.KeyID,
+    action: '/InputSystem/DataService/api/v1/upload/gysfayuan/'+item.KeyID,
     listType: 'picture',
     defaultFileList: [...fileList],
     className: 'upload-list-inline',
@@ -108,31 +108,20 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='贷款日期：' hasFeedback {...formItemLayout} >
-          {getFieldDecorator('LoanDate', {
-            initialValue: moment(item.LoanDate) || moment(new Date()),
+        <FormItem label='供应商名称：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('SupplierName', {
+            initialValue: item.SupplierName,
             rules: [
               {
-                required: false,
-                message: '请填写贷款日期'
-              }
-            ]
-          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
-        </FormItem>
-        <FormItem label='金额：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Account', {
-            initialValue: item.Account,
-            rules: [
-              {
-                required: false,
-                message: '请填金额'
+                required: true,
+                message: '请填供应商名称'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='状态' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Status', {
-            initialValue: item.Status,
+        <FormItem label='有无法院执行信息' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Law', {
+            initialValue: item.Law,
             rules: [
               {
                 required: false,
@@ -140,28 +129,6 @@ const modal = ({
               }
             ]
           })(<Input />)}
-        </FormItem>
-        <FormItem label='余额：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Balance', {
-            initialValue: item.Balance,
-            rules: [
-              {
-                required: false,
-                message: '请填余额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='截止日期：' hasFeedback {...formItemLayout} >
-          {getFieldDecorator('OverDate', {
-            initialValue: moment(item.OverDate) || moment(new Date()),
-            rules: [
-              {
-                required: false,
-                message: '请填写合同日期'
-              }
-            ]
-          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
         </FormItem>
       </Form>
       {type=="create"?[]:upload}

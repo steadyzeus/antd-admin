@@ -20,7 +20,6 @@ const formItemLayout = {
 const modal = ({
   visible,
   type,
-  second,
   item = {},
   onOk,
   onCancel,
@@ -39,7 +38,6 @@ const modal = ({
       const data = {
         ...getFieldsValue(),
         key: item.key,
-        Timing:second,
         ScanFile:currentImgUrl
       }
       onOk(data)
@@ -47,7 +45,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建历史中标项目' : '修改历史中标项目'}`,
+    title: `${type === 'create' ? '新建结婚证信息' : '修改结婚证信息'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -90,7 +88,7 @@ const modal = ({
   }
 
   const props = {
-    action: '/InputSystem/DataService/api/v1/upload/lszhongbiao/'+item.KeyID,
+    action: '/InputSystem/DataService/api/v1/upload/jiehunzheng/'+item.KeyID,
     listType: 'picture',
     defaultFileList: [...fileList],
     className: 'upload-list-inline',
@@ -108,61 +106,57 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='项目名称：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('ProjectName', {
-            initialValue: item.ProjectName,
+        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Name', {
+            initialValue: item.Name,
             rules: [
               {
                 required: true,
-                message: '请填项目名称'
+                message: '请填姓名'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='客户名称' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('CustomerName', {
-            initialValue: item.CustomerName,
+        <FormItem label='身份证号码：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('PID', {
+            initialValue: item.PID,
             rules: [
               {
                 required: false,
-                message: '请填写状态'
+                message: '请填金额'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='产品：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Product', {
-            initialValue: item.Product,
+        <FormItem label='法人婚姻证明类型：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('HunyinType', {
+            initialValue: item.HunyinType,
+            rules: [
+              {
+                required: true,
+                message: '请选择是否有违法信息'
+              }
+            ]
+          })(
+            <Radio.Group>
+              <Radio value={0}>结婚证</Radio>
+              <Radio value={1}>未婚：单身说明书</Radio>
+              <Radio value={2}>离婚：离婚证+单身说明书</Radio>
+            </Radio.Group>
+          )}
+        </FormItem>
+        <FormItem label='备注信息：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Remark', {
+            initialValue: item.Remark,
             rules: [
               {
                 required: false,
-                message: '请填余额'
+                message: '请填金额'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Account', {
-            initialValue: item.Account,
-            rules: [
-              {
-                required: false,
-                message: '请填写状态'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='付款方式：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('PayWay', {
-            initialValue: item.PayWay,
-            rules: [
-              {
-                required: false,
-                message: '请填余额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
+
       </Form>
       {type=="create"?[]:upload}
     </Modal>

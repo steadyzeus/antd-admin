@@ -77,47 +77,30 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '项目名称',
-        dataIndex: 'ProjectName',
-        key: 'ProjectName'
+        title: '地址',
+        dataIndex: 'Address',
+        key: 'Address'
       }, {
-        title: '客户名称',
-        dataIndex: 'CustomerName',
-        key: 'CustomerName'
+        title: '预估值',
+        dataIndex: 'EstimatePrice',
+        key: 'EstimatePrice'
       }, {
-        title: '中标时间',
-        dataIndex: 'BidTime',
-        key: 'BidTime'
+        title: '贷款年限',
+        dataIndex: 'LoanTerm',
+        key: 'LoanTerm'
       }, {
-        title: '产品',
-        dataIndex: 'Product',
-        key: 'Product'
+        title: '贷款余额 ',
+        dataIndex: 'LoanBalance',
+        key: 'LoanBalance'
       }, {
-        title: '中标金额',
-        dataIndex: 'BidMoney',
-        key: 'BidMoney'
+        title: '现值',
+        dataIndex: 'CurrentPrice',
+        key: 'CurrentPrice'
       },{
-        title: '收款时间',
-        dataIndex: 'ReceiveTime',
-        key: 'ReceiveTime'
+        title: '是否抵押',
+        dataIndex: 'Mortgage',
+        key: 'Mortgage'
       }, {
-        title: '预收金额',
-        dataIndex: 'PreMoney',
-        key: 'PreMoney'
-      }, {
-        title: '项目状态',
-        dataIndex: 'Status',
-        key: 'Status'
-      }, {
-        title: '余额',
-        dataIndex: 'Balance',
-        key: 'Balance'
-      }, {
-        title: '截止日期',
-        dataIndex: 'OverDate',
-        key: 'OverDate',
-        render: (text) => <span>{new Date(text).toLocaleString()}</span>
-      },  {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
@@ -154,7 +137,7 @@ class zhangcheng extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>中标客户信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加中标客户信息</Button>
+      <span className={styles.title}>房产信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加房产信息</Button>
       <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }

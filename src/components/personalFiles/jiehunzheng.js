@@ -77,47 +77,36 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '项目名称',
-        dataIndex: 'ProjectName',
-        key: 'ProjectName'
+        title: '姓名',
+        dataIndex: 'Name',
+        key: 'Name'
       }, {
-        title: '客户名称',
-        dataIndex: 'CustomerName',
-        key: 'CustomerName'
+        title: '身份证号码',
+        dataIndex: 'PID',
+        key: 'PID'
       }, {
-        title: '中标时间',
-        dataIndex: 'BidTime',
-        key: 'BidTime'
+        title: '婚姻证明类型（法人代表）',
+        dataIndex: 'HunyinType',
+        key: 'HunyinType',
+        render: (text) => {
+          debugger;
+          let tip="";
+          if(text==0){
+            tip= "结婚证"
+        }
+        else if(text==1){
+            tip= "未婚：单身说明书"
+        }
+        else if(text==2){
+            tip= "离婚：离婚证+单身说明书"
+        }
+        return tip;
+        }
       }, {
-        title: '产品',
-        dataIndex: 'Product',
-        key: 'Product'
+        title: '备注信息',
+        dataIndex: 'Remark',
+        key: 'Remark'
       }, {
-        title: '中标金额',
-        dataIndex: 'BidMoney',
-        key: 'BidMoney'
-      },{
-        title: '收款时间',
-        dataIndex: 'ReceiveTime',
-        key: 'ReceiveTime'
-      }, {
-        title: '预收金额',
-        dataIndex: 'PreMoney',
-        key: 'PreMoney'
-      }, {
-        title: '项目状态',
-        dataIndex: 'Status',
-        key: 'Status'
-      }, {
-        title: '余额',
-        dataIndex: 'Balance',
-        key: 'Balance'
-      }, {
-        title: '截止日期',
-        dataIndex: 'OverDate',
-        key: 'OverDate',
-        render: (text) => <span>{new Date(text).toLocaleString()}</span>
-      },  {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
@@ -154,7 +143,7 @@ class zhangcheng extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>中标客户信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加中标客户信息</Button>
+      <span className={styles.title}>结婚证信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加结婚证信息</Button>
       <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }

@@ -20,7 +20,6 @@ const formItemLayout = {
 const modal = ({
   visible,
   type,
-  second,
   item = {},
   onOk,
   onCancel,
@@ -39,7 +38,6 @@ const modal = ({
       const data = {
         ...getFieldsValue(),
         key: item.key,
-        Timing:second,
         ScanFile:currentImgUrl
       }
       onOk(data)
@@ -47,7 +45,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建历史中标项目' : '修改历史中标项目'}`,
+    title: `${type === 'create' ? '新建征信证明' : '修改征信证明'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -90,7 +88,7 @@ const modal = ({
   }
 
   const props = {
-    action: '/InputSystem/DataService/api/v1/upload/lszhongbiao/'+item.KeyID,
+    action: '/InputSystem/DataService/api/v1/upload/zhengxin/'+item.KeyID,
     listType: 'picture',
     defaultFileList: [...fileList],
     className: 'upload-list-inline',
@@ -108,57 +106,24 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='项目名称：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('ProjectName', {
-            initialValue: item.ProjectName,
+        <FormItem label='名称：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Name', {
+            initialValue: item.Name,
             rules: [
               {
                 required: true,
-                message: '请填项目名称'
+                message: '请填名称'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='客户名称' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('CustomerName', {
-            initialValue: item.CustomerName,
+        <FormItem label='备注信息：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Remark', {
+            initialValue: item.Remark,
             rules: [
               {
                 required: false,
-                message: '请填写状态'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='产品：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Product', {
-            initialValue: item.Product,
-            rules: [
-              {
-                required: false,
-                message: '请填余额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='金额' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Account', {
-            initialValue: item.Account,
-            rules: [
-              {
-                required: false,
-                message: '请填写状态'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='付款方式：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('PayWay', {
-            initialValue: item.PayWay,
-            rules: [
-              {
-                required: false,
-                message: '请填余额'
+                message: '请填金额'
               }
             ]
           })(<Input />)}

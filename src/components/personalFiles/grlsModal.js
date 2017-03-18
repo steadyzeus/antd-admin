@@ -2,12 +2,6 @@ import React, { PropTypes } from 'react'
 import { Form, Input, InputNumber, Radio, Modal,DatePicker, TimePicker} from 'antd'
 const FormItem = Form.Item
 import { Upload, Button, Icon,message } from 'antd';
-
-import moment from 'moment';
-
-// It's recommended to set locale in entry file globaly.
-import 'moment/locale/zh-cn';
-moment.locale('zh-cn');
 const formItemLayout = {
   labelCol: {
     span: 6
@@ -17,10 +11,15 @@ const formItemLayout = {
   }
 }
 
+import moment from 'moment';
+
+// It's recommended to set locale in entry file globaly.
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
+
 const modal = ({
   visible,
   type,
-  second,
   item = {},
   onOk,
   onCancel,
@@ -39,7 +38,6 @@ const modal = ({
       const data = {
         ...getFieldsValue(),
         key: item.key,
-        Timing:second,
         ScanFile:currentImgUrl
       }
       onOk(data)
@@ -47,7 +45,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建中标客户信息' : '修改中标客户信息'}`,
+    title: `${type === 'create' ? '新建个人流水' : '修改个人流水'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -90,7 +88,7 @@ const modal = ({
   }
 
   const props = {
-    action: '/InputSystem/DataService/api/v1/upload/kehu/'+item.KeyID,
+    action: '/InputSystem/DataService/api/v1/upload/grls/'+item.KeyID,
     listType: 'picture',
     defaultFileList: [...fileList],
     className: 'upload-list-inline',
@@ -105,118 +103,153 @@ const modal = ({
     </Upload>
     <div style={{marginTop:"10px",color:'red'}}>注意：只允许上传一张图片，第二次上传会覆盖上一张</div>
   </div>;
+
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='项目名称：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('ProjectName', {
-            initialValue: item.ProjectName,
+        <FormItem label='交易日期' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('JYDate', {
+            initialValue: item.JYDate,
             rules: [
               {
                 required: true,
-                message: '请填项目名称'
+                message: '请填写交易日期'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='客户名称：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('CustomerName', {
-            initialValue: item.CustomerName,
+          <FormItem label='交易时间' hasFeedback {...formItemLayout}>
+            {getFieldDecorator('JYTime', {
+              initialValue: item.JYTime,
+              rules: [
+                {
+                  required: false,
+                  message: '请填写金额'
+                }
+              ]
+            })(<Input />)}
+          </FormItem>
+        <FormItem label='收入金额' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('InMoney', {
+            initialValue: item.InMoney,
             rules: [
               {
                 required: false,
-                message: '请填金额'
+                message: '请填写金额'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='中标时间：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BidTime', {
-            initialValue: item.BidTime,
+        <FormItem label='支出金额' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('OutMoney', {
+            initialValue: item.OutMoney,
             rules: [
               {
                 required: false,
-                message: '请填金额'
+                message: '请填写金额'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='产品：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Product', {
-            initialValue: item.Product,
-            rules: [
-              {
-                required: false,
-                message: '请填金额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='中标金额：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('BidMoney', {
-            initialValue: item.BidMoney,
-            rules: [
-              {
-                required: false,
-                message: '请填金额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='收款时间' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('ReceiveTime', {
-            initialValue: item.ReceiveTime,
-            rules: [
-              {
-                required: false,
-                message: '请填写状态'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='预收金额：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('PreMoney', {
-            initialValue: item.PreMoney,
-            rules: [
-              {
-                required: false,
-                message: '请填余额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='项目状态：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Status', {
-            initialValue: item.Status,
-            rules: [
-              {
-                required: false,
-                message: '请填余额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='余额：' hasFeedback {...formItemLayout}>
+        <FormItem label='本次余额' hasFeedback {...formItemLayout}>
           {getFieldDecorator('Balance', {
             initialValue: item.Balance,
             rules: [
               {
                 required: false,
-                message: '请填余额'
+                message: '请填写金额'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='截止日期：' hasFeedback {...formItemLayout} >
-          {getFieldDecorator('OverDate', {
-            initialValue: moment(item.OverDate) || moment(new Date()),
+        <FormItem label='对方账号' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('DFAccount', {
+            initialValue: item.DFAccount,
             rules: [
               {
                 required: false,
-                message: '请填写合同日期'
+                message: '请填写金额'
               }
             ]
-          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
+          })(<Input />)}
+        </FormItem>
+        <FormItem label='对方户名' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('DFName', {
+            initialValue: item.DFName,
+            rules: [
+              {
+                required: false,
+                message: '请填写金额'
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+            <FormItem label='交易行名' hasFeedback {...formItemLayout}>
+              {getFieldDecorator('JYBank', {
+                initialValue: item.JYBank,
+                rules: [
+                  {
+                    required: false,
+                    message: '请填写金额'
+                  }
+                ]
+              })(<Input />)}
+            </FormItem>
+            <FormItem label='交易方式' hasFeedback {...formItemLayout}>
+              {getFieldDecorator('JYType', {
+                initialValue: item.JYType,
+                rules: [
+                  {
+                    required: false,
+                    message: '请填写金额'
+                  }
+                ]
+              })(<Input />)}
+            </FormItem>
+            <FormItem label='交易渠道' hasFeedback {...formItemLayout}>
+              {getFieldDecorator('JYChannel', {
+                initialValue: item.JYChannel,
+                rules: [
+                  {
+                    required: false,
+                    message: '请填写金额'
+                  }
+                ]
+              })(<Input />)}
+            </FormItem>
+        <FormItem label='转账用途' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('TransReason', {
+            initialValue: item.TransReason,
+            rules: [
+              {
+                required: false,
+                message: '请填写金额'
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem label='交易说明' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('JYRemark', {
+            initialValue: item.JYRemark,
+            rules: [
+              {
+                required: false,
+                message: '请填写金额'
+              }
+            ]
+          })(<Input />)}
+        </FormItem>
+        <FormItem label='交易摘要' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('JYSummary', {
+            initialValue: item.JYSummary,
+            rules: [
+              {
+                required: false,
+                message: '请填写金额'
+              }
+            ]
+          })(<Input />)}
         </FormItem>
       </Form>
       {type=="create"?[]:upload}

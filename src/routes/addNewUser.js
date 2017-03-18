@@ -47,14 +47,1052 @@ import ShebaoModal from '../components/companyFiles/shebaoModal'
 import Shebao from '../components/companyFiles/shebao'
 import GongyingshangModal from '../components/purchaseProjects/gongyingshangModal'
 import Gongyingshang from '../components/purchaseProjects/gongyingshang'
+import KehuModal from '../components/purchaseProjects/kehuModal'
+import Kehu from '../components/purchaseProjects/kehu'
+import LszhongbiaoModal from '../components/purchaseProjects/lszhongbiaoModal'
+import Lszhongbiao from '../components/purchaseProjects/lszhongbiao'
+import GysfayuanModal from '../components/purchaseProjects/gysfayuanModal'
+import Gysfayuan from '../components/purchaseProjects/gysfayuan'
+import CheliangModal from '../components/personalFiles/cheliangModal'
+import Cheliang from '../components/personalFiles/cheliang'
+import FangchanModal from '../components/personalFiles/fangchanModal'
+import Fangchan from '../components/personalFiles/fangchan'
+import PoxingyongkaModal from '../components/personalFiles/poxingyongkaModal'
+import Poxingyongka from '../components/personalFiles/poxingyongka'
+import XingyongkaModal from '../components/personalFiles/xingyongkaModal'
+import Xingyongka from '../components/personalFiles/xingyongka'
+import PodaikuanModal from '../components/personalFiles/podaikuanModal'
+import Podaikuan from '../components/personalFiles/podaikuan'
+import GrdaikuanModal from '../components/personalFiles/grdaikuanModal'
+import Grdaikuan from '../components/personalFiles/grdaikuan'
+import ShenfenzhengModal from '../components/personalFiles/shenfenzhengModal'
+import Shenfenzheng from '../components/personalFiles/shenfenzheng'
+import HukoubenModal from '../components/personalFiles/hukoubenModal'
+import Hukouben from '../components/personalFiles/hukouben'
+import GrtyzhengxinModal from '../components/personalFiles/grtyzhengxinModal'
+import Grtyzhengxin from '../components/personalFiles/grtyzhengxin'
+import ZhengxinModal from '../components/personalFiles/zhengxinModal'
+import Zhengxin from '../components/personalFiles/zhengxin'
+import JiehunzhengModal from '../components/personalFiles/jiehunzhengModal'
+import Jiehunzheng from '../components/personalFiles/jiehunzheng'
+import GrlsModal from '../components/personalFiles/grlsModal'
+import Grls from '../components/personalFiles/grls'
+
+
 
 import { Tabs, Icon,message,Tag,Collapse ,Spin} from 'antd';
 const Panel = Collapse.Panel;
 const TabPane = Tabs.TabPane;
 
 function AddNewUser ({ location, dispatch, addNewUser }) {
-  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,shuiwu,qyls,shebao,gongyingshang} = addNewUser;
+  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,qyls,shebao,gongyingshang,kehu,lszhongbiao,gysfayuan,cheliang,fangchan,shuiwu,poxingyongka,xingyongka,podaikuan,grdaikuan,shenfenzheng,hukouben,jiehunzheng,grtyzhengxin,zhengxin,grls} = addNewUser;
   /*const { field, keyword } = location.query*/
+  const grlsModalProps = {
+    item: grls.modalType === 'create' ? {} : grls.currentItem,
+    type: grls.modalType,
+    visible: grls.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${grls.modalType}`,
+        payload: {data:data,bizName:'grls',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'grls'}
+      })
+    }
+  }
+
+  const grlsProps = {
+    dataSource: grls.list,
+    loading,
+    pagination: grls.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'grls',
+          bizName:'grls'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'grls'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'grls'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'grls'
+          }
+        })
+      }},
+    onExcelAdd(data){
+      let listArrayData=data;
+      dispatch({
+        type: 'addNewUser/queryExcelSuccess',
+        payload: {
+          list: listArrayData,
+          pagination: {
+            total: listArrayData.length,
+            current: 1
+          },
+          bizName:'grls'
+        }
+      })
+    }
+
+  }
+
+
+  const jiehunzhengModalProps = {
+    item: jiehunzheng.modalType === 'create' ? {} : jiehunzheng.currentItem,
+    type: jiehunzheng.modalType,
+    visible: jiehunzheng.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${jiehunzheng.modalType}`,
+        payload: {data:data,bizName:'jiehunzheng',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'jiehunzheng'}
+      })
+    }
+  }
+
+  const jiehunzhengProps = {
+    dataSource: jiehunzheng.list,
+    loading,
+    pagination: jiehunzheng.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'jiehunzheng',
+          bizName:'jiehunzheng'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'jiehunzheng'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'jiehunzheng'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'jiehunzheng'
+          }
+        })
+      }}
+  }
+
+  const zhengxinModalProps = {
+    item: zhengxin.modalType === 'create' ? {} : zhengxin.currentItem,
+    type: zhengxin.modalType,
+    visible: zhengxin.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${zhengxin.modalType}`,
+        payload: {data:data,bizName:'zhengxin',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'zhengxin'}
+      })
+    }
+  }
+
+  const zhengxinProps = {
+    dataSource: zhengxin.list,
+    loading,
+    pagination: zhengxin.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'zhengxin',
+          bizName:'zhengxin'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'zhengxin'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'zhengxin'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'zhengxin'
+          }
+        })
+      }}
+  }
+
+  const grtyzhengxinModalProps = {
+    item: grtyzhengxin.modalType === 'create' ? {} : grtyzhengxin.currentItem,
+    type: grtyzhengxin.modalType,
+    visible: grtyzhengxin.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${grtyzhengxin.modalType}`,
+        payload: {data:data,bizName:'grtyzhengxin',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'grtyzhengxin'}
+      })
+    }
+  }
+
+  const grtyzhengxinProps = {
+    dataSource: grtyzhengxin.list,
+    loading,
+    pagination: grtyzhengxin.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'grtyzhengxin',
+          bizName:'grtyzhengxin'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'grtyzhengxin'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'grtyzhengxin'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'grtyzhengxin'
+          }
+        })
+      }}
+  }
+
+  const hukoubenModalProps = {
+    item: hukouben.modalType === 'create' ? {} : hukouben.currentItem,
+    type: hukouben.modalType,
+    visible: hukouben.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${hukouben.modalType}`,
+        payload: {data:data,bizName:'hukouben',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'hukouben'}
+      })
+    }
+  }
+
+  const hukoubenProps = {
+    dataSource: hukouben.list,
+    loading,
+    pagination: hukouben.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'hukouben',
+          bizName:'hukouben'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'hukouben'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'hukouben'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'hukouben'
+          }
+        })
+      }}
+  }
+
+  const shenfenzhengModalProps = {
+    item: shenfenzheng.modalType === 'create' ? {} : shenfenzheng.currentItem,
+    type: shenfenzheng.modalType,
+    visible: shenfenzheng.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${shenfenzheng.modalType}`,
+        payload: {data:data,bizName:'shenfenzheng',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'shenfenzheng'}
+      })
+    }
+  }
+
+  const shenfenzhengProps = {
+    dataSource: shenfenzheng.list,
+    loading,
+    pagination: shenfenzheng.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'shenfenzheng',
+          bizName:'shenfenzheng'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'shenfenzheng'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'shenfenzheng'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'shenfenzheng'
+          }
+        })
+      }}
+  }
+
+
+  const grdaikuanModalProps = {
+    item: grdaikuan.modalType === 'create' ? {} : grdaikuan.currentItem,
+    type: grdaikuan.modalType,
+    visible: grdaikuan.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${grdaikuan.modalType}`,
+        payload: {data:data,bizName:'grdaikuan',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'grdaikuan'}
+      })
+    }
+  }
+
+  const grdaikuanProps = {
+    dataSource: grdaikuan.list,
+    loading,
+    pagination: grdaikuan.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'grdaikuan',
+          bizName:'grdaikuan'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'grdaikuan'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'grdaikuan'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'grdaikuan'
+          }
+        })
+      }}
+  }
+
+  const podaikuanModalProps = {
+    item: podaikuan.modalType === 'create' ? {} : podaikuan.currentItem,
+    type: podaikuan.modalType,
+    visible: podaikuan.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${podaikuan.modalType}`,
+        payload: {data:data,bizName:'podaikuan',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'podaikuan'}
+      })
+    }
+  }
+
+  const podaikuanProps = {
+    dataSource: podaikuan.list,
+    loading,
+    pagination: podaikuan.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'podaikuan',
+          bizName:'podaikuan'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'podaikuan'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'podaikuan'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'podaikuan'
+          }
+        })
+      }}
+  }
+  const xingyongkaModalProps = {
+    item: xingyongka.modalType === 'create' ? {} : xingyongka.currentItem,
+    type: xingyongka.modalType,
+    visible: xingyongka.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${xingyongka.modalType}`,
+        payload: {data:data,bizName:'xingyongka',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'xingyongka'}
+      })
+    }
+  }
+
+  const xingyongkaProps = {
+    dataSource: xingyongka.list,
+    loading,
+    pagination: xingyongka.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'xingyongka',
+          bizName:'xingyongka'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'xingyongka'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'xingyongka'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'xingyongka'
+          }
+        })
+      }}
+  }
+
+  const poxingyongkaModalProps = {
+    item: poxingyongka.modalType === 'create' ? {} : poxingyongka.currentItem,
+    type: poxingyongka.modalType,
+    visible: poxingyongka.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${poxingyongka.modalType}`,
+        payload: {data:data,bizName:'poxingyongka',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'poxingyongka'}
+      })
+    }
+  }
+
+  const poxingyongkaProps = {
+    dataSource: poxingyongka.list,
+    loading,
+    pagination: poxingyongka.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'poxingyongka',
+          bizName:'poxingyongka'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'poxingyongka'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'poxingyongka'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'poxingyongka'
+          }
+        })
+      }}
+  }
+
+  const fangchanModalProps = {
+    item: fangchan.modalType === 'create' ? {} : fangchan.currentItem,
+    type: fangchan.modalType,
+    visible: fangchan.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${fangchan.modalType}`,
+        payload: {data:data,bizName:'fangchan',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'fangchan'}
+      })
+    }
+  }
+
+  const fangchanProps = {
+    dataSource: fangchan.list,
+    loading,
+    pagination: fangchan.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'fangchan',
+          bizName:'fangchan'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'fangchan'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'fangchan'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'fangchan'
+          }
+        })
+      }}
+  }
+
+  const cheliangModalProps = {
+    item: cheliang.modalType === 'create' ? {} : cheliang.currentItem,
+    type: cheliang.modalType,
+    visible: cheliang.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${cheliang.modalType}`,
+        payload: {data:data,bizName:'cheliang',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'cheliang'}
+      })
+    }
+  }
+
+  const cheliangProps = {
+    dataSource: cheliang.list,
+    loading,
+    pagination: cheliang.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'cheliang',
+          bizName:'cheliang'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'cheliang'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'cheliang'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'cheliang'
+          }
+        })
+      }}
+  }
+
+  const gysfayuanModalProps = {
+    item: gysfayuan.modalType === 'create' ? {} : gysfayuan.currentItem,
+    type: gysfayuan.modalType,
+    visible: gysfayuan.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${gysfayuan.modalType}`,
+        payload: {data:data,bizName:'gysfayuan',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'gysfayuan'}
+      })
+    }
+  }
+
+  const gysfayuanProps = {
+    dataSource: gysfayuan.list,
+    loading,
+    pagination: gysfayuan.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'gysfayuan',
+          bizName:'gysfayuan'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'gysfayuan'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'gysfayuan'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'gysfayuan'
+          }
+        })
+      }}
+  }
+
+  const lszhongbiaoModalProps = {
+    item: lszhongbiao.modalType === 'create' ? {} : lszhongbiao.currentItem,
+    type: lszhongbiao.modalType,
+    visible: lszhongbiao.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${lszhongbiao.modalType}`,
+        payload: {data:data,bizName:'lszhongbiao',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'lszhongbiao'}
+      })
+    }
+  }
+
+  const lszhongbiaoProps = {
+    dataSource: lszhongbiao.list,
+    loading,
+    pagination: lszhongbiao.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'lszhongbiao',
+          bizName:'lszhongbiao'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'lszhongbiao'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'lszhongbiao'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'lszhongbiao'
+          }
+        })
+      }}
+  }
+
+  const kehuModalProps = {
+    item: kehu.modalType === 'create' ? {} : kehu.currentItem,
+    type: kehu.modalType,
+    visible: kehu.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${kehu.modalType}`,
+        payload: {data:data,bizName:'kehu',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'kehu'}
+      })
+    }
+  }
+
+  const kehuProps = {
+    dataSource: kehu.list,
+    loading,
+    pagination: kehu.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'kehu',
+          bizName:'kehu'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'kehu'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'kehu'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'kehu'
+          }
+        })
+      }}
+  }
+
   const gongyingshangModalProps = {
     second:gongyingshang.second,
     item: gongyingshang.modalType === 'create' ? {} : gongyingshang.currentItem,
@@ -1621,7 +2659,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
 
 
   const UserModalGen = () =>
-  <div><GongyingshangModal {...gongyingshangModalProps}/><ShebaoModal {...shebaoModalProps}/><QylsModal {...qylsModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
+  <div><ShenfenzhengModal {...shenfenzhengModalProps}/> <HukoubenModal {...hukoubenModalProps}/> <GrtyzhengxinModal {...grtyzhengxinModalProps}/><JiehunzhengModal {...jiehunzhengModalProps}/> <ZhengxinModal {...zhengxinModalProps}/> <GrdaikuanModal {...grdaikuanModalProps}/> <PodaikuanModal {...podaikuanModalProps}/> <PoxingyongkaModal {...poxingyongkaModalProps}/> <XingyongkaModal {...xingyongkaModalProps}/><GrlsModal {...grlsModalProps}/><CheliangModal {...cheliangModalProps}/> <FangchanModal {...fangchanModalProps}/><GysfayuanModal {...gysfayuanModalProps}/><LszhongbiaoModal {...lszhongbiaoModalProps}/><KehuModal {...kehuModalProps}/><GongyingshangModal {...gongyingshangModalProps}/><ShebaoModal {...shebaoModalProps}/><QylsModal {...qylsModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
     <KhxkzModal {...khxkzModalProps}/>
     <AqscxkzModal {...aqscxkzModalProps}/>
     <PodanbaoModal {...podanbaoModalProps}/><GrdanbaoModal {...grdanbaoModalProps}/><DanbaoModal {...danbaoModalProps}/><DaikuanModal {...daikuanModalProps}/><GudingzichanModal {...gudingzichanModalProps}/><CunhuoModal {...cunhuoModalProps}/><QitayingfuModal {...qitayingfuModalProps}/><QitayingshouModal {...qitayingshouModalProps}/><YufuModal {...yufuModalProps}/><YushouModal {...yushouModalProps}/><YingfuModal {...yingfuModalProps}/><YingshouModal {...yingshouModalProps}/><GerenfayuanModal {...gerenfayuanModalProps}/><FayuanModal {...fayuanModalProps}/><ZizhiModal Modal {...zizhiModalProps}/><ZhangchengModal {...zhangchengModalProps}/>< CompanyBaseInfoModal{...companyBaseInfoModalProps}/></div>
@@ -1687,23 +2725,50 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
         <TabPane tab={<span><Icon type="laptop" />采购项目</span>} key="2">
           <Collapse defaultActiveKey={['1']}>
             <Panel header="1.中标通知书+签约合同" key="1">
-              <CompanyBaseInfo {...companyBaseInfoProps}/>
+              <Kehu {...kehuProps}/>
             </Panel>
             <Panel header="2.上下游采购合同(3份以上)" key="2">
               <Gongyingshang {...gongyingshangProps} second={0}/>
               <Gongyingshang {...gongyingshangProps} second={1}/>
             </Panel>
             <Panel header="3.过往业务中标书" key="3">
-
+              <Lszhongbiao {...lszhongbiaoProps}/>
             </Panel>
             <Panel header="4.法院执行信息" key="4">
-
+              <Gysfayuan {...gysfayuanProps}/>
             </Panel>
           </Collapse>
 
         </TabPane>
         <TabPane tab={<span><Icon type="team" />个人资料</span>} key="3">
-          Tab 3
+          <Collapse defaultActiveKey={['1']}>
+            <Panel header="1.身份证信息" key="1">
+              <Shenfenzheng {...shenfenzhengProps}/>
+            </Panel>
+            <Panel header="2.户口本信息" key="2">
+              <Hukouben {...hukoubenProps}/>
+            </Panel>
+            <Panel header="3.结婚证(法人代表)" key="3">
+              <Jiehunzheng {...jiehunzhengProps}/>
+            </Panel>
+            <Panel header="4.个人同意征信查询书" key="4">
+              <Grtyzhengxin {...grtyzhengxinProps}/>
+            </Panel>
+            <Panel header="5.个人征信回执单" key="5">
+              <Zhengxin {...zhengxinProps}/>
+              <Grdaikuan {...grdaikuanProps}/>
+              <Podaikuan {...podaikuanProps}/>
+              <Xingyongka {...xingyongkaProps}/>
+              <Poxingyongka {...poxingyongkaProps}/>
+            </Panel>
+            <Panel header="6.个人银行流水一年" key="6">
+              <Grls {...grlsProps}/>
+            </Panel>
+            <Panel header="7.资产证明：房产证+房产讯息调档+车辆行驶证" key="7">
+              <Fangchan {...fangchanProps}/>
+              <Cheliang {...cheliangProps}/>
+            </Panel>
+          </Collapse>
         </TabPane>
         <TabPane tab={<span><Icon type="solution" />其他资料</span>} key="4">
           Tab 4

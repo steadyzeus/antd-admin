@@ -77,27 +77,13 @@ class zhangcheng extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '贷款日期',
-        dataIndex: 'LoanDate',
-        key: 'LoanDate',
-        render: (text) => <span>{new Date(text).toLocaleString()}</span>
+        title: '供应商名称',
+        dataIndex: 'SupplierName',
+        key: 'SupplierName'
       }, {
-        title: '金额',
-        dataIndex: 'Account',
-        key: 'Account'
-      }, {
-        title: '状态',
-        dataIndex: 'Status',
-        key: 'Status'
-      }, {
-        title: '余额',
-        dataIndex: 'Balance',
-        key: 'Balance'
-      }, {
-        title: '截止日期',
-        dataIndex: 'OverDate',
-        key: 'OverDate',
-        render: (text) => <span>{new Date(text).toLocaleString()}</span>
+        title: '有无法院执行信息',
+        dataIndex: 'Law',
+        key: 'Law'
       }, {
         title: '扫描文件',
         dataIndex: 'ScanFile',
