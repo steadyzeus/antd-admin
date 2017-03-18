@@ -45,7 +45,7 @@ const modal = ({
   }
 
   const modalOpts = {
-    title: `${type === 'create' ? '新建配偶个人贷款信息' : '修改配偶个人贷款信息'}`,
+    title: `${type === 'create' ? '新建其他资料信息' : '修改其他资料信息'}`,
     visible,
     onOk: handleOk,
     onCancel,
@@ -88,7 +88,7 @@ const modal = ({
   }
 
   const props = {
-    action: '/InputSystem/DataService/api/v1/upload/podaikuan/'+item.KeyID,
+    action: '/InputSystem/DataService/api/v1/upload/qitaziliao/'+item.KeyID,
     listType: 'picture',
     defaultFileList: [...fileList],
     className: 'upload-list-inline',
@@ -106,68 +106,13 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='贷款类别：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('LoanName', {
-            initialValue: item.LoanName,
+        <FormItem label='名称：' hasFeedback {...formItemLayout}>
+          {getFieldDecorator('Name', {
+            initialValue: item.Name,
             rules: [
               {
                 required: true,
-                message: '请填贷款类别'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='金额：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Account', {
-            initialValue: item.Account,
-            rules: [
-              {
-                required: false,
-                message: '请填金额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='到期时间：' hasFeedback {...formItemLayout} >
-          {getFieldDecorator('OverTime', {
-            initialValue: moment(item.OverTime) || moment(new Date()),
-            rules: [
-              {
-                required: false,
-                message: '请填写合同日期'
-              }
-            ]
-          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
-        </FormItem>
-        <FormItem label='未还余额：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Debt', {
-            initialValue: item.Debt,
-            rules: [
-              {
-                required: false,
-                message: '请填金额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='担保事务：' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Guarantee', {
-            initialValue: item.Guarantee,
-            rules: [
-              {
-                required: false,
-                message: '请填金额'
-              }
-            ]
-          })(<Input />)}
-        </FormItem>
-        <FormItem label='有无逾期' hasFeedback {...formItemLayout}>
-          {getFieldDecorator('Timeout', {
-            initialValue: item.Timeout,
-            rules: [
-              {
-                required: false,
-                message: '请填写状态'
+                message: '请填名称'
               }
             ]
           })(<Input />)}

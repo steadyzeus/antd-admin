@@ -109,16 +109,16 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='交易时间：' hasFeedback {...formItemLayout} >
+        <FormItem label='交易时间' hasFeedback {...formItemLayout}>
           {getFieldDecorator('JYDateTime', {
-            initialValue: moment(item.JYDateTime) || moment(new Date()),
+            initialValue: item.JYDateTime,
             rules: [
               {
                 required: true,
                 message: '请填写交易时间'
               }
             ]
-          })(<DatePicker style={{width:'284px'}} showTime format="YYYY-MM-DD HH:mm:ss"/>)}
+          })(<Input />)}
         </FormItem>
         <FormItem label='收入金额' hasFeedback {...formItemLayout}>
           {getFieldDecorator('InMoney', {

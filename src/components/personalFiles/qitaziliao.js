@@ -4,7 +4,7 @@ import {TweenOneGroup} from 'rc-tween-one'
 import styles from './companyFiles.less'
 const Mock = require('mockjs')
 
-class yingshou extends React.Component {
+class zhangcheng extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -69,43 +69,18 @@ class yingshou extends React.Component {
 
   render () {
     const {
-      second,
       dataSource,
       pagination,
       onAdd,
       onDeleteItem,
       onEditItem
     } = this.props
-    let currentDataSource=[];
-    for(let item of dataSource){
-      if(item.Timing!=null && item.Timing==second){
-        currentDataSource.push(item);
-      }
-    }
-
     const columns = [
       {
-        title: '客户名称',
-        dataIndex: 'CustomerName',
-        key: 'CustomerName',
-      }, {
-        title: '合同日期',
-        dataIndex: 'ContractDate',
-        key: 'ContractDate',
-        render: (text) => <span>{new Date(text).toLocaleString()}</span>
-      }, {
-        title: '合同金额',
-        dataIndex: 'ContractAccount',
-        key: 'ContractAccount'
-      }, {
-        title: '账期',
-        dataIndex: 'AccountPeriod',
-        key: 'AccountPeriod'
-      }, {
-        title: '结算方式',
-        dataIndex: 'PayMethod',
-        key: 'PayMethod'
-      }, {
+        title: '名称',
+        dataIndex: 'Name',
+        key: 'Name'
+      },  {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
@@ -131,7 +106,7 @@ class yingshou extends React.Component {
         width: 100,
         render: (text, record) => (
           <p>
-            <a onClick={() => onEditItem(record,second)} style={{
+            <a onClick={() => onEditItem(record)} style={{
               marginRight: 4
             }}>编辑</a>
             <Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.KeyID)}>
@@ -142,10 +117,10 @@ class yingshou extends React.Component {
       }
     ]
     return <div className={styles.marginBottom}>
-      <span className={styles.title}>应收账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd(second)}>添加应收账款</Button>
-      <Table className={styles.marginTop15} bordered columns={columns} dataSource={currentDataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <span className={styles.title}>其他资料信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加其他资料信息</Button>
+      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default yingshou
+export default zhangcheng

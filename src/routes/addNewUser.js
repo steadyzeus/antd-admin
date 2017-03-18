@@ -77,6 +77,8 @@ import JiehunzhengModal from '../components/personalFiles/jiehunzhengModal'
 import Jiehunzheng from '../components/personalFiles/jiehunzheng'
 import GrlsModal from '../components/personalFiles/grlsModal'
 import Grls from '../components/personalFiles/grls'
+import QitaziliaoModal from '../components/personalFiles/qitaziliaoModal'
+import Qitaziliao from '../components/personalFiles/qitaziliao'
 
 
 
@@ -85,8 +87,74 @@ const Panel = Collapse.Panel;
 const TabPane = Tabs.TabPane;
 
 function AddNewUser ({ location, dispatch, addNewUser }) {
-  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,qyls,shebao,gongyingshang,kehu,lszhongbiao,gysfayuan,cheliang,fangchan,shuiwu,poxingyongka,xingyongka,podaikuan,grdaikuan,shenfenzheng,hukouben,jiehunzheng,grtyzhengxin,zhengxin,grls} = addNewUser;
+  const { loading,Name,currentContent,gongshang,zhangcheng,zizhi ,fayuan,gerenfayuan,yingshou,yingfu,yushou,yufu,qitayingshou,qitayingfu,cunhuo,gudingzichan,daikuan,danbao,grdanbao,podanbao,aqscxkz,khxkz,qyls,shebao,gongyingshang,kehu,lszhongbiao,gysfayuan,cheliang,fangchan,shuiwu,poxingyongka,xingyongka,podaikuan,grdaikuan,shenfenzheng,hukouben,jiehunzheng,grtyzhengxin,zhengxin,grls,qitaziliao} = addNewUser;
   /*const { field, keyword } = location.query*/
+  const qitaziliaoModalProps = {
+    item: qitaziliao.modalType === 'create' ? {} : qitaziliao.currentItem,
+    type: qitaziliao.modalType,
+    visible: qitaziliao.modalVisible,
+    onOk (data) {
+      dispatch({
+        type: `addNewUser/${qitaziliao.modalType}`,
+        payload: {data:data,bizName:'qitaziliao',gongshangID:gongshang.list[0].KeyID}
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'addNewUser/hideModal',
+        payload: {bizName:'qitaziliao'}
+      })
+    }
+  }
+
+  const qitaziliaoProps = {
+    dataSource: qitaziliao.list,
+    loading,
+    pagination: qitaziliao.pagination,
+    onPageChange (page) {
+      const { query, pathname } = location
+      dispatch(routerRedux.push({
+        pathname: pathname,
+        query: {
+          ...query,
+          page: page.current,
+          pageSize: page.pageSize,
+          dataType:'qitaziliao',
+          bizName:'qitaziliao'
+        }
+      }))
+    },
+    onDeleteItem (id) {
+      dispatch({
+        type: 'addNewUser/delete',
+        payload: {id:id,bizName:'qitaziliao'}
+      })
+    },
+    onEditItem (item) {
+      dispatch({
+        type: 'addNewUser/showModal',
+        payload: {
+          modalType: 'update',
+          currentItem: item,
+          bizName:'qitaziliao'
+        }
+      })
+    },
+    onAdd () {
+      if(gongshang.list.length==0){
+        message.warn('请先填写录入:工商信息！');
+      }
+      else{
+        dispatch({
+          type: 'addNewUser/showModal',
+          payload: {
+            modalType: 'create',
+            bizName:'qitaziliao'
+          }
+        })
+      }}
+  }
+
   const grlsModalProps = {
     item: grls.modalType === 'create' ? {} : grls.currentItem,
     type: grls.modalType,
@@ -2659,7 +2727,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
 
 
   const UserModalGen = () =>
-  <div><ShenfenzhengModal {...shenfenzhengModalProps}/> <HukoubenModal {...hukoubenModalProps}/> <GrtyzhengxinModal {...grtyzhengxinModalProps}/><JiehunzhengModal {...jiehunzhengModalProps}/> <ZhengxinModal {...zhengxinModalProps}/> <GrdaikuanModal {...grdaikuanModalProps}/> <PodaikuanModal {...podaikuanModalProps}/> <PoxingyongkaModal {...poxingyongkaModalProps}/> <XingyongkaModal {...xingyongkaModalProps}/><GrlsModal {...grlsModalProps}/><CheliangModal {...cheliangModalProps}/> <FangchanModal {...fangchanModalProps}/><GysfayuanModal {...gysfayuanModalProps}/><LszhongbiaoModal {...lszhongbiaoModalProps}/><KehuModal {...kehuModalProps}/><GongyingshangModal {...gongyingshangModalProps}/><ShebaoModal {...shebaoModalProps}/><QylsModal {...qylsModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
+  <div><QitaziliaoModal {...qitaziliaoModalProps}/><ShenfenzhengModal {...shenfenzhengModalProps}/> <HukoubenModal {...hukoubenModalProps}/> <GrtyzhengxinModal {...grtyzhengxinModalProps}/><JiehunzhengModal {...jiehunzhengModalProps}/> <ZhengxinModal {...zhengxinModalProps}/> <GrdaikuanModal {...grdaikuanModalProps}/> <PodaikuanModal {...podaikuanModalProps}/> <PoxingyongkaModal {...poxingyongkaModalProps}/> <XingyongkaModal {...xingyongkaModalProps}/><GrlsModal {...grlsModalProps}/><CheliangModal {...cheliangModalProps}/> <FangchanModal {...fangchanModalProps}/><GysfayuanModal {...gysfayuanModalProps}/><LszhongbiaoModal {...lszhongbiaoModalProps}/><KehuModal {...kehuModalProps}/><GongyingshangModal {...gongyingshangModalProps}/><ShebaoModal {...shebaoModalProps}/><QylsModal {...qylsModalProps}/><ShuiwuModal {...shuiwuModalProps}/>
     <KhxkzModal {...khxkzModalProps}/>
     <AqscxkzModal {...aqscxkzModalProps}/>
     <PodanbaoModal {...podanbaoModalProps}/><GrdanbaoModal {...grdanbaoModalProps}/><DanbaoModal {...danbaoModalProps}/><DaikuanModal {...daikuanModalProps}/><GudingzichanModal {...gudingzichanModalProps}/><CunhuoModal {...cunhuoModalProps}/><QitayingfuModal {...qitayingfuModalProps}/><QitayingshouModal {...qitayingshouModalProps}/><YufuModal {...yufuModalProps}/><YushouModal {...yushouModalProps}/><YingfuModal {...yingfuModalProps}/><YingshouModal {...yingshouModalProps}/><GerenfayuanModal {...gerenfayuanModalProps}/><FayuanModal {...fayuanModalProps}/><ZizhiModal Modal {...zizhiModalProps}/><ZhangchengModal {...zhangchengModalProps}/>< CompanyBaseInfoModal{...companyBaseInfoModalProps}/></div>
@@ -2771,7 +2839,7 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
           </Collapse>
         </TabPane>
         <TabPane tab={<span><Icon type="solution" />其他资料</span>} key="4">
-          Tab 4
+          <Qitaziliao {...qitaziliaoProps}/>
         </TabPane>
       </Tabs>
       </Spin>

@@ -33,9 +33,9 @@ function Header ({user, logout, switchSider, siderFold, isNavbar, menuPopoverVis
           float: 'right'
         }} title={< span > <Icon type='user' />
           {user.name} < /span>}>
-          <Menu.Item key='repassword'>
+          {/*<Menu.Item key='repassword'>
             <a>重置密码</a>
-          </Menu.Item>
+          </Menu.Item>*/}
           <Menu.Item key='logout'>
             <a>退出</a>
           </Menu.Item>

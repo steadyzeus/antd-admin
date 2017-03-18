@@ -133,8 +133,7 @@ class zhangcheng extends React.Component {
       }, {
         title: '交易时间',
         dataIndex: 'JYDateTime',
-        key: 'JYDateTime',
-        render: (text) => <span>{new Date(text).toLocaleString()}</span>
+        key: 'JYDateTime'
       }, {
         title: '收入金额',
         dataIndex: 'InMoney',
@@ -171,7 +170,7 @@ class zhangcheng extends React.Component {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
-        render: (text) => <a target="_blank" href={text?("http://p.cdito.cn:8118"+text):"javascript:void(0)"} >{text?"点击查看图片":"请点击编辑上传图片"}</a>
+        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看图片</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传图片</a>
       }, {
         title: '添加时间',
         dataIndex: 'AddTime',
@@ -201,7 +200,9 @@ class zhangcheng extends React.Component {
     ]
     return <div className={styles.marginBottom}>
       <span className={styles.title}>企业流水</span>{upload}<Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加企业流水</Button>
-      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={currentPagination} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <Table className={styles.marginTop15} scroll={{
+        x: 1000
+      }} bordered columns={columns} dataSource={dataSource} simple pagination={currentPagination} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }

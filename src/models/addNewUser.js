@@ -494,7 +494,18 @@ export default {
         current: 1,
         total: null
       }},
-
+    qitaziliao:{
+      list:[],
+      currentItem: {},
+      modalVisible: false,
+      modalType: 'create',
+      pagination: {
+        showSizeChanger: true,
+        showQuickJumper: true,
+        showTotal: total => `共 ${total} 条`,
+        current: 1,
+        total: null
+      }},
     loading: false,
     currentContent:"添加新客户信息",
     Name:""
@@ -567,7 +578,7 @@ export default {
               total: null
             }};
         }
-        /*for(let item of OtherMaterial){
+        for(let item of OtherMaterial){
           corpObject[item.BizName]={list:JSON.parse(item.Data),currentItem: {},
             modalVisible: false,
             modalType: 'create',
@@ -578,7 +589,7 @@ export default {
               current: 1,
               total: null
             }};
-        }*/
+        }
         yield put({
           type: 'queryAllDataSuccess',
           payload: {
@@ -1146,6 +1157,18 @@ export default {
             total: null
           }},
         cheliang:{
+          list:[],
+          currentItem: {},
+          modalVisible: false,
+          modalType: 'create',
+          pagination: {
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: total => `共 ${total} 条`,
+            current: 1,
+            total: null
+          }},
+        qitaziliao:{
           list:[],
           currentItem: {},
           modalVisible: false,
