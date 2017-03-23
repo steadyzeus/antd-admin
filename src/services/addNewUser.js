@@ -7,6 +7,12 @@ export async function queryBizName (params) {
   })
 }
 
+export async function queryUserAdmin (params) {
+  return request('http://p.cdito.cn:8118/InputSystem/DataService/api/v1/list/yonghu', {
+    method: 'get'
+  })
+}
+
 export async function deleteBizNameByID (params) {
   var data=JSON.stringify({'KeyID':params.record.id,'BizName':params.record.bizName});
   return request('http://p.cdito.cn:8118/InputSystem/DataService/api/v1/delete', {

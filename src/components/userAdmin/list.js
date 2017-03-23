@@ -1,10 +1,10 @@
 import React from 'react'
 import {Table, Popconfirm,Button} from 'antd'
 import {TweenOneGroup} from 'rc-tween-one'
-import styles from './companyFiles.less'
+import styles from './list.less'
 const Mock = require('mockjs')
 
-class yufu extends React.Component {
+class list extends React.Component {
   constructor (props) {
     super(props)
     this.enterAnim = [
@@ -69,42 +69,28 @@ class yufu extends React.Component {
 
   render () {
     const {
-      second,
+      onAdd,
+      loading,
       dataSource,
       pagination,
-      onAdd,
       onDeleteItem,
-      onEditItem
+      onEditItem,
+      onClickDetail
     } = this.props
-    let currentDataSource=[];
-    for(let item of dataSource){
-      if(item.Timing!=null && item.Timing==second){
-        currentDataSource.push(item);
-      }
-    }
     const columns = [
-      {
-        title: '供应商名称',
-        dataIndex: 'SupplierName',
-        key: 'SupplierName',
+       {
+        title: '用户名',
+        dataIndex: 'UserName',
+        key: 'UserName'
       }, {
-        title: '日期',
-        dataIndex: 'PreDate',
-        key: 'PreDate',
-        render: (text) => <span>{new Date(text).toLocaleString()}</span>
+        title: '密码',
+        dataIndex: 'Password',
+        key: 'Password'
       }, {
-        title: '金额',
-        dataIndex: 'PreAccount',
-        key: 'PreAccount'
-      },  {
-        title: '扫描文件',
-        dataIndex: 'ScanFile',
-        key: 'ScanFile',
-        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看文件</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传图片</a>
-      },{
-        title: '贷款编号',
-        dataIndex: 'LoanId',
-        key: 'LoanId'
+        title: '是否管理员',
+        dataIndex: 'IsAdmin',
+        key: 'IsAdmin',
+        render: (text) => <span>{text?"是":"否"}</span>
       }, {
         title: '添加时间',
         dataIndex: 'AddTime',
@@ -122,7 +108,7 @@ class yufu extends React.Component {
         width: 100,
         render: (text, record) => (
           <p>
-            <a onClick={() => onEditItem(record,second)} style={{
+            <a onClick={() => onEditItem(record)} style={{
               marginRight: 4
             }}>编辑</a>
             <Popconfirm title='确定要删除吗？' onConfirm={() => onDeleteItem(record.KeyID)}>
@@ -132,11 +118,10 @@ class yufu extends React.Component {
         )
       }
     ]
-    return <div className={styles.marginBottom}>
-      <span className={styles.title}>预付账款：</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd(second)}>添加预付账款</Button>
-      <Table className={styles.marginTop15} bordered columns={columns} dataSource={currentDataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+    return <div><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={()=>onAdd()}>添加人员</Button>
+      <Table className={styles.marginTop15} bordered  columns={columns} dataSource={dataSource} loading={loading} pagination={false} simple rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }
 
-export default yufu
+export default list

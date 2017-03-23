@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'dva'
+import { routerRedux } from 'dva/router'
 import Login from './login'
 import Header from '../components/layout/header'
 import Bread from '../components/layout/bread'
@@ -32,6 +33,11 @@ function App ({children, location, dispatch, app}) {
     },
     logout () {
       dispatch({type: 'app/logout'})
+    },
+    goUserAdmin(){
+      dispatch(routerRedux.push({
+        pathname: 'userAdmin',
+      }))
     },
     switchSider () {
       dispatch({type: 'app/switchSider'})

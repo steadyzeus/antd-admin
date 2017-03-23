@@ -1,5 +1,7 @@
 import {login, userInfo, logout} from '../services/app'
+import { queryUserAdmin} from '../services/addNewUser'
 import {parse} from 'qs'
+import {message} from 'antd'
 
 export default {
   namespace: 'app',
@@ -7,7 +9,8 @@ export default {
     login: false,
     loading: false,
     user: {
-      name: '吴彦祖'
+      name: '吴彦祖',
+      isAdmin:0,
     },
     loginButtonLoading: false,
     menuPopoverVisible: false,
@@ -29,16 +32,27 @@ export default {
       payload
     }, {call, put}) {
       yield put({type: 'showLoginButtonLoading'})
-      const data = yield call(login, parse(payload))
-      if (data.success) {
+      const data = yield call(queryUserAdmin, parse(payload))
+      let userAdmin=JSON.parse(data.Data);
+      let loginRight=false;
+      let currentUser={};
+      for(let item of userAdmin){
+        if(item.UserName==payload.username&&item.Password==payload.password){
+          currentUser=item;
+          loginRight=true;
+        }
+      }
+      if (loginRight) {
         yield put({
           type: 'loginSuccess',
           payload: {
             user: {
-              name: payload.username
+              name: currentUser.Username,
+              isAdmin:currentUser.IsAdmin
             }
           }})
       } else {
+        message.error("用户名或者密码错误");
         yield put({
           type: 'loginFail'
         })

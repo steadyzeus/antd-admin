@@ -121,7 +121,7 @@ class zhangcheng extends React.Component {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
-        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看图片</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传图片</a>
+        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看文件</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传图片</a>
       },{
         title: '贷款编号',
         dataIndex: 'LoanId',
@@ -155,7 +155,9 @@ class zhangcheng extends React.Component {
     ]
     return <div className={styles.marginBottom}>
       <span className={styles.title}>中标客户信息</span><Button icon="plus" className={styles.marginLeft15} type="primary" onClick={onAdd}>添加中标客户信息</Button>
-      <Table className={styles.marginTop15} bordered columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
+      <Table className={styles.marginTop15} bordered scroll={{
+        x: 1000
+      }} columns={columns} dataSource={dataSource} simple pagination={false} rowKey={record => record.KeyID} getBodyWrapper={this.getBodyWrapper} />
     </div>
   }
 }

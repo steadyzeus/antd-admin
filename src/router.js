@@ -62,6 +62,14 @@ export default function ({history, app}) {
               cb(null, require('./routes/addNewUser'))
             })
           }
+        },{
+          path: 'userAdmin',
+          name: 'userAdmin',
+          getComponent (nextState, cb) {
+            require.ensure([], require => {
+              cb(null, require('./routes/userAdmin'))
+            })
+          }
         }
         , {
           path: 'ui/ico',

@@ -77,11 +77,11 @@ class gerenfayuan extends React.Component {
     } = this.props
     const columns = [
       {
-        title: '实际控制人',
+        title: '姓名',
         dataIndex: 'Controller',
         key: 'Controller',
       }, {
-        title: '法人',
+        title: '关系',
         dataIndex: 'Owner',
         key: 'Owner'
       }, {
@@ -96,7 +96,7 @@ class gerenfayuan extends React.Component {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
-        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看图片</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传图片</a>
+        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看文件</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传图片</a>
       },{
         title: '贷款编号',
         dataIndex: 'LoanId',

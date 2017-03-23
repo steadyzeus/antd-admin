@@ -102,24 +102,24 @@ const modal = ({
   return (
     <Modal {...modalOpts}>
       <Form horizontal>
-        <FormItem label='实际控制人：' hasFeedback {...formItemLayout}>
+        <FormItem label='姓名：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('Controller', {
             initialValue: item.Controller,
             rules: [
               {
                 required: true,
-                message: '请填写实际控制人'
+                message: '请填写姓名'
               }
             ]
           })(<Input />)}
         </FormItem>
-        <FormItem label='法人：' hasFeedback {...formItemLayout}>
+        <FormItem label='关系：' hasFeedback {...formItemLayout}>
           {getFieldDecorator('Owner', {
             initialValue: item.Owner,
             rules: [
               {
                 required: false,
-                message: '请填写法人'
+                message: '请填写关系'
               }
             ]
           })(<Input />)}

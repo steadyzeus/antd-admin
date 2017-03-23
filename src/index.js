@@ -11,6 +11,7 @@ app.model(require('./models/dashboard'))
 app.model(require('./models/users'))
 app.model(require('./models/usersManagement'))
 app.model(require('./models/addNewUser'))
+app.model(require('./models/userAdmin'))
 
 // 3. Router
 app.router(require('./router'))

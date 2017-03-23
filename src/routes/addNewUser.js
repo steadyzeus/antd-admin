@@ -2745,8 +2745,6 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
             <Panel header="2.公司章程正本" key="2">
               <Zhangcheng {...zhangchengProps}/>
               <Zizhi {...zizhiProps}/>
-              <Fayuan {...fayuanProps}/>
-              <Gerenfayuan {...gerenfayuanProps}/>
             </Panel>
             <Panel header="3.近两年审计报告或财报" key="3">
               <Yingshou {...yingshouProps} second={0}/>
@@ -2771,8 +2769,6 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
             <Panel header="5.企业征信表" key="5">
               <Daikuan {...daikuanProps}/>
               <Danbao {...danbaoProps}/>
-              <Grdanbao {...grdanbaoProps}/>
-              <Podanbao {...podanbaoProps}/>
             </Panel>
             <Panel header="6.开户许可证" key="6">
               <Khxkz {...khxkzProps}/>
@@ -2785,10 +2781,10 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
               <Qyls {...qylsProps}/>
               <Shebao {...shebaoProps}/>
             </Panel>
+            <Panel header="9.法院执行信息" key="9">
+              <Fayuan {...fayuanProps}/>
+            </Panel>
           </Collapse>
-
-
-
         </TabPane>
         <TabPane tab={<span><Icon type="laptop" />采购项目</span>} key="2">
           <Collapse defaultActiveKey={['1']}>
@@ -2822,8 +2818,10 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
             <Panel header="4.个人同意征信查询书" key="4">
               <Grtyzhengxin {...grtyzhengxinProps}/>
             </Panel>
-            <Panel header="5.个人征信回执单" key="5">
+            <Panel header="5.个人征信" key="5">
               <Zhengxin {...zhengxinProps}/>
+              <Grdanbao {...grdanbaoProps}/>
+              <Podanbao {...podanbaoProps}/>
               <Grdaikuan {...grdaikuanProps}/>
               <Podaikuan {...podaikuanProps}/>
               <Xingyongka {...xingyongkaProps}/>
@@ -2835,6 +2833,9 @@ function AddNewUser ({ location, dispatch, addNewUser }) {
             <Panel header="7.资产证明：房产证+房产讯息调档+车辆行驶证" key="7">
               <Fangchan {...fangchanProps}/>
               <Cheliang {...cheliangProps}/>
+            </Panel>
+            <Panel header="8.法院执行信息" key="8">
+              <Gerenfayuan {...gerenfayuanProps}/>
             </Panel>
           </Collapse>
         </TabPane>
