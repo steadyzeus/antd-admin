@@ -68,7 +68,7 @@ const modal = ({
                 message: '密码未填写'
               }
             ]
-          })(<Input />)}
+          })(<Input type='password'/>)}
         </FormItem>
         <FormItem label='是否是管理员' hasFeedback {...formItemLayout}>
           {getFieldDecorator('IsAdmin', {

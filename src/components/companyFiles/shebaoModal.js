@@ -94,7 +94,7 @@ const modal = ({
   const upload=<div style={{paddingLeft: "8px"}}>
     <Upload {...props}>
       <Button>
-        <Icon type="upload" />上传图片
+        <Icon type="upload" />上传文件
       </Button>
     </Upload>
     <div style={{marginTop:"10px",color:'red'}}>注意：只允许上传一张图片，第二次上传会覆盖上一张</div>

@@ -96,7 +96,7 @@ class zhangcheng extends React.Component {
         title: '扫描文件',
         dataIndex: 'ScanFile',
         key: 'ScanFile',
-        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看文件</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传图片</a>
+        render: (text,record) =>text?<a target="_blank" href={"http://p.cdito.cn:8118"+text}>点击查看文件</a>:<a onClick={() => onEditItem(record)} style={{marginRight: 4}}>请点击编辑上传文件</a>
       },{
         title: '贷款编号',
         dataIndex: 'LoanId',

@@ -85,7 +85,8 @@ class list extends React.Component {
       }, {
         title: '密码',
         dataIndex: 'Password',
-        key: 'Password'
+        key: 'Password',
+        render: (text) => <span>***</span>
       }, {
         title: '是否管理员',
         dataIndex: 'IsAdmin',
